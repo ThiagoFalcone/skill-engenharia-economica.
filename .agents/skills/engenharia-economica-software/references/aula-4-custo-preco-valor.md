@@ -5,8 +5,8 @@
 |---|---|---|---|
 | **Direto** | Atribuível ao projeto sem rateio | Horas da equipe × custo/hora | `custo_direto_equipe(horas, custo_hora, encargos)` |
 | **Indireto** | Compartilhado; precisa de rateio | Infra, licenças, aluguel, gestão | `rateio_indireto(total, horas_projeto, horas_totais)` |
-| **Fixo** | Não varia com o volume | Hospedagem base, salários |, |
-| **Variável** | Varia com clientes/uso | Gateway de pagamento, storage por cliente |, |
+| **Fixo** | Não varia com o volume | Hospedagem base, salários | n/a |
+| **Variável** | Varia com clientes/uso | Gateway de pagamento, storage por cliente | n/a |
 
 Custo/hora de **mercado** valora esforço mesmo quando ninguém foi pago (ex.: TCC): é custo de oportunidade. Diga isso explicitamente. Encargos (CLT ≈ 70–100 %) só se a mão de obra for CLT; PJ/freelancer, 0.
 
