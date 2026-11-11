@@ -1,6 +1,6 @@
 # Roteiro do Mini Workshop (24/11/2026)
 
-Objetivo: mostrar **ao vivo** como acionar a skill, interpretar os resultados e **defender a valoração do TCC**. Sugestão de 15 a 20 minutos (ajuste ao tempo da turma). Slides opcionais: há um PDF pronto em `docs/apresentacao-workshop.pdf` (16 slides, regenerável com `python docs/gerar_apresentacao.py`); a demo no terminal é o centro.
+Objetivo: mostrar **ao vivo** como acionar a skill, interpretar os resultados e **defender a valoração do TCC**. Sugestão de 15 a 20 minutos (ajuste ao tempo da turma). Slides opcionais: há um PDF pronto em `docs/apresentacao-workshop.pdf` (18 slides, regenerável com `python docs/gerar_apresentacao.py`); a demo no terminal é o centro.
 
 ## Preparação (antes da aula)
 - [ ] Repositório clonado e Claude Code aberto na pasta; `python --version` ≥ 3.9.
@@ -27,11 +27,11 @@ Objetivo: mostrar **ao vivo** como acionar a skill, interpretar os resultados e 
 
 ## Banco de perguntas prováveis
 1. *Por que a TMA de 16%?* Juros básicos + prêmio de risco de produto digital em estágio inicial; é premissa e entra na sensibilidade.
-2. *Por que o VPL ficou tão perto de zero (R$ 1.941, TIR 16,7% × TMA 16%)?* O fluxo só fica positivo nos anos 4–5; com 7 anos o VPL sobe para R$ 124 mil (cenário `horizonte_7_anos`); o ponto de equilíbrio é ≈ 99% do volume do caso-base — por isso o veredito é "viável, porém no limite".
+2. *Por que o VPL ficou tão perto de zero (R$ 1.941, TIR 16,7% × TMA 16%)?* O fluxo só fica positivo nos anos 4–5; com 7 anos o VPL sobe para R$ 124 mil (cenário `horizonte_7_anos`); o ponto de equilíbrio é ≈ 99% do volume do caso-base, por isso o veredito é "viável, porém no limite".
 3. *TIR ou VPL, qual decide?* VPL (valor absoluto criado); TIR confere; com várias TIR usa-se VPL/TIRM.
 4. *Por que payback descontado ≠ simples?* O descontado traz cada fluxo a valor presente pela TMA.
 5. *O que o IDC < 1 significa?* Cada R$ 1 gasto entregou menos de R$ 1 de valor orçado; EAC = BAC/IDC reprevê o custo final.
-6. *Depreciação afeta o caixa?* Não é desembolso; só reduz o imposto (escudo fiscal) se há lucro tributável — ver cenário `lucro_real`.
+6. *Depreciação afeta o caixa?* Não é desembolso; só reduz o imposto (escudo fiscal) se há lucro tributável, ver cenário `lucro_real`.
 7. *Por que não colocar mais testes?* Análise marginal: o nível "mutação/cobertura ~100%" custa R$ 15 mil a mais para entregar só R$ 4 mil (Δcusto > Δbenefício).
 8. *E se o preço fosse maior?* Mostrar o tornado (variar o preço em ±20% muda o VPL em uma amplitude de R$ 91 mil): preço é a maior alavanca; checar o teto pelo valor percebido.
 9. *Como evitar o LLM errar conta?* Ele não calcula: executa `econ_core.py`, coberto por testes com valores conferidos à mão.

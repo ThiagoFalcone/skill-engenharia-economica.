@@ -49,7 +49,7 @@ def t(s: str) -> str:
 class Deck:
     def __init__(self, caminho):
         self.c = canvas.Canvas(caminho, pagesize=(W, H))
-        self.c.setTitle("Engenharia Econômica Agêntica — Mini Workshop")
+        self.c.setTitle("Engenharia Econômica Agêntica, Mini Workshop")
         self.c.setAuthor(", ".join(EQUIPE))
         self.n = 0
 
@@ -227,7 +227,7 @@ def main():
     for nome in EQUIPE:
         d.texto(90, y, nome, 24, white, BOLD)
         y -= 36
-    d.texto(90, 90, "Faculdade SENAI FATESG · Bacharelado em Engenharia de Software · Mini Workshop — 24/11/2026", 17, HexColor("#9FC6D9"))
+    d.texto(90, 90, "Faculdade SENAI FATESG · Bacharelado em Engenharia de Software · Mini Workshop, 24/11/2026", 17, HexColor("#9FC6D9"))
     d.texto(90, 62, "Docente: Msc. Ujeverson Tavares Sampaio", 17, HexColor("#9FC6D9"))
 
     # 2 desafio
@@ -266,7 +266,7 @@ def main():
         ["scripts/gerar_relatorio.py", "Relatório Markdown completo a partir de um JSON"],
         ["references/ (9 arquivos)", "Teoria e critérios de decisão, um tema por arquivo"],
         ["examples/", "tcc-input.json e tcc-valuation-report.md (valoração do TCC)"],
-        ["evals/ · tests/", "10 evals e 56 testes (fórmulas, CLI, estrutura, relatório)"],
+        ["evals/ · tests/", "10 evals e 57 testes (fórmulas, CLI, estrutura, relatório)"],
     ], 17, 46)
 
     # 5 aulas
@@ -283,7 +283,7 @@ def main():
 
     # 6 confiabilidade
     d.slide("Por que dá para confiar nos números", "O LLM orquestra; o Python calcula")
-    d.card(60, 440, 360, 150, "Testes automatizados", "56", TEAL, "fórmulas conferidas à mão")
+    d.card(60, 440, 360, 150, "Testes automatizados", "57", TEAL, "fórmulas conferidas à mão")
     d.card(460, 440, 360, 150, "Evals", "10", AMBER, "7 numéricos reexecutados no teste")
     d.card(860, 440, 360, 150, "Dependências", "0", NAVY, "só biblioteca padrão do Python")
     d.bullets(60, 370, [
@@ -343,6 +343,51 @@ def main():
                          f"{num(f_eq * 100, 0)}% do volume de clientes do caso-base: pequenas mudanças de premissa invertem a decisão.", 1100, 20, INK)
     d.bullets(60, 195, ["Índice de lucratividade " + num(ind["indice_lucratividade"], 3) + " · ROI descontado " + pct(ind["roi_descontado"]) +
                         " · TIRM " + pct(ind["tirm"])], 1160, 20)
+
+    # 10b painel de decisão
+    d.slide("Painel de decisão", "Semáforo calculado dos números do relatório (mesmos critérios do examples/)")
+    cores = {"bom": TEAL, "medio": AMBER, "ruim": RED}
+    rot = {"bom": "BOM", "medio": "ATENÇÃO", "ruim": "CRÍTICO"}
+    y = 565
+    d.rect(60, y - 36, 1160, 40, NAVY, raio=6)
+    for x_, h_ in ((80, "Critério"), (520, "Resultado"), (820, "Sinal"), (960, "Regra")):
+        d.texto(x_, y - 24, h_, 16, white, BOLD)
+    y -= 40
+    for i, (crit, res, niv, regra) in enumerate(gr.semaforo(entrada, modelo, ind, saas, cen)):
+        if i % 2 == 0:
+            d.rect(60, y - 36, 1160, 40, LIGHT, raio=0)
+        d.texto(80, y - 24, crit, 17)
+        d.texto(520, y - 24, res, 17)
+        d.c.setFillColor(cores[niv])
+        d.c.circle(832, y - 17, 9, fill=1, stroke=0)
+        d.texto(850, y - 24, rot[niv], 15, cores[niv], BOLD)
+        d.texto(960, y - 24, regra, 14, MUTED)
+        y -= 40
+    d.paragrafo(60, 130, "Leitura: verde em unidade econômica (LTV/CAC) e prazo; amarelo em VPL, TIR, payback e custo; vermelho no cenário pessimista. "
+                         "É o retrato honesto de um produto acadêmico ainda sem validação de mercado.", 1150, 18, MUTED)
+
+    # 10c três visões
+    d.slide("Três visões do mesmo resultado", "O mesmo relatório, lido por quem decide")
+    ult_ = serie[-1]
+    visoes = [
+        ("Investidor", TEAL, [f"Investe {brl(det['capex'])} hoje.", f"VPL {brl(ind['vpl'])} e TIR {pct(ind['tir'])} contra TMA {pct(ind['tma'], 0)}.",
+                              f"Payback descontado de {num(ind['payback_descontado'], 1)} anos.", f"Maior risco: preço e volume de clientes.",
+                              f"Pessimista: VPL {brl(cen['pessimista']['vpl'])}."]),
+        ("Product Owner", AMBER, [f"Preço de {brl(saas['arpa_mensal'])}/mês, 50% do valor percebido.", f"LTV/CAC de {num(saas['ltv_cac'], 1)}.",
+                                  f"Prioridade do roadmap: {wsjf[0]['nome'].split(' (')[0]}.", "Evitar app móvel e integrações pesadas agora."]),
+        ("Líder técnico", NAVY, [f"IDC {num(ult_['idc'], 2)}: custo acima do valor entregue.", f"IDP {num(ult_['idp'], 2)}: prazo cumprido.",
+                                 f"EAC {brl(ult_['eac'])} contra BAC {brl(gva['bac'])}.", "Hospedagem de menor custo: VM gratuita (sem SLA).",
+                                 "Qualidade: parar antes de 100% de cobertura."]),
+    ]
+    x = 60
+    for tit, cor, itens in visoes:
+        d.rect(x, 130, 365, 420, LIGHT)
+        d.rect(x, 130 + 410, 365, 10, cor, raio=4)
+        d.texto(x + 24, 500, tit, 26, INK, BOLD)
+        y = 455
+        for it in itens:
+            y = d.paragrafo(x + 24, y, it, 320, 18, INK) - 12
+        x += 397
 
     # 11 cenários
     d.slide("Cenários e sensibilidade (Aula 7)", "O que precisa ser verdade para o projeto valer a pena")
