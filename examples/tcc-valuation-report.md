@@ -1,11 +1,11 @@
-# Relatório de valoração econômica — Plataforma de Governança de Projetos de Software
+# Relatório de valoração econômica, Plataforma de Governança de Projetos de Software
 
 > Gerado pela skill `engenharia-economica-software` (cálculos determinísticos em `scripts/econ_core.py`).
 > **Aviso:** todos os valores de mercado e de esforço são **premissas estimadas** listadas na seção 13; o resultado é tão confiável quanto essas premissas.
 
 ## 1. Sumário executivo (Aula 7)
 
-**VIÁVEL** nas premissas do caso-base: VPL positivo e TIR acima da TMA — porém **no limite** (|VPL| ≤ 5% do investimento): pequenas mudanças de premissa invertem a decisão.
+**VIÁVEL** nas premissas do caso-base: VPL positivo e TIR acima da TMA, porém **no limite** (|VPL| ≤ 5% do investimento): pequenas mudanças de premissa invertem a decisão.
 
 | Indicador | Resultado |
 |---|---|
@@ -19,6 +19,19 @@
 | Índice de lucratividade (VP entradas / VP saídas) | 1,026 |
 | ROI descontado (VPL / VP das saídas) | 2,6% |
 | Fluxo acumulado nominal em 5 anos | R$ 72.473 |
+
+**Painel de decisão** (semáforo calculado dos números; ✅ bom, ⚠️ atenção, ❌ crítico):
+
+| Critério | Resultado | Sinal | Regra |
+|---|---|---|---|
+| VPL > 0 | R$ 1.941 | ⚠️ | bom se > 5% do investimento |
+| TIR > TMA | 16,7% vs 16,0% | ⚠️ | bom se 3 pontos acima da TMA |
+| Payback descontado no horizonte | 4,96 anos | ⚠️ | bom se em até 70% do horizonte |
+| LTV/CAC ≥ 3 | 14,8 | ✅ | referência de mercado |
+| Payback do CAC ≤ 12 meses | 2,3 meses | ✅ | recuperação rápida do CAC |
+| Cenário pessimista com VPL ≥ 0 | -R$ 95.189 | ❌ | resiliência a premissas ruins |
+| IDC final ≥ 1 | 0,94 | ⚠️ | custo versus valor entregue |
+| IDP final ≥ 1 | 1,00 | ✅ | prazo versus planejado |
 
 **Ponto de equilíbrio:** com os demais parâmetros fixos, o VPL zera com **99% do volume de clientes** do caso-base (≈ 99 organizações pagantes no fim do ano 5).
 
@@ -35,7 +48,7 @@ Principais riscos e hipóteses: ver seção 13.
 **Hospedagem atual:** VM Oracle Cloud Always Free com HTTPS (Let's Encrypt)
 
 **Tamanho medido no repositório:** 28,5 mil linhas (6.005 Java de produção, 2.076 Java de testes, 20.397 TS/TSX), 6 migrations, 284 testes de backend, 232 verificações de API e 70 testes de interface.  
-Referência COCOMO básico (modo orgânico): 80,8 pessoa-mês e 13,3 meses — o esforço declarado (864 h ≈ 5,4 pessoa-mês) fica bem abaixo, coerente com o uso de frameworks e ferramentas modernas, mas é um ponto a defender (seção 13).
+Referência COCOMO básico (modo orgânico): 80,8 pessoa-mês e 13,3 meses, o esforço declarado (864 h ≈ 5,4 pessoa-mês) fica bem abaixo, coerente com o uso de frameworks e ferramentas modernas, mas é um ponto a defender (seção 13).
 
 ## 3. Custo, preço e valor (Aula 4)
 
@@ -48,7 +61,7 @@ Referência COCOMO básico (modo orgânico): 80,8 pessoa-mês e 13,3 meses — o
 | Desenvolvedor frontend / testes | 288 | R$ 50 | R$ 14.400 |
 | **Total orçado (BAC)** | **864** |  | **R$ 47.520** |
 
-Custo real acumulado nas sprints (CR): **R$ 50.400** (6,1% sobre o orçamento) — usado como investimento direto no modelo.
+Custo real acumulado nas sprints (CR): **R$ 50.400** (6,1% sobre o orçamento), usado como investimento direto no modelo.
 
 | Item de investimento (CapEx, ano 0) | Valor | Natureza |
 |---|---|---|
@@ -71,7 +84,7 @@ O desenvolvimento é tratado como **CapEx** (ativo intangível amortizado em 5 a
 
 Margem de 20% sobre o preço equivale a markup de 25,0% sobre o custo (`k = m/(1-m)`). Nos anos 1, 2 o preço praticado fica abaixo do custo unitário pleno, porque a base de clientes ainda não dilui os custos fixos.
 
-**Valor percebido pelo cliente:** uma organização que gasta 40 h/mês em retrabalho de requisitos a R$ 60/h e reduz 15% economiza **R$ 360/mês**. O preço de R$ 179 captura 50% desse valor — preço ancorado no valor, abaixo do valor entregue.
+**Valor percebido pelo cliente:** uma organização que gasta 40 h/mês em retrabalho de requisitos a R$ 60/h e reduz 15% economiza **R$ 360/mês**. O preço de R$ 179 captura 50% desse valor, preço ancorado no valor, abaixo do valor entregue.
 
 ## 4. Demonstrativo e fluxo de caixa (Aulas 3 e 5)
 
@@ -95,6 +108,17 @@ Margem de 20% sobre o preço equivale a markup de 25,0% sobre o custo (`k = m/(1
 |---|---|---|---|---|---|---|
 | Fluxo acumulado | -R$ 55.800 | -R$ 67.903 | -R$ 79.590 | -R$ 73.307 | -R$ 28.320 | R$ 72.473 |
 | Fluxo descontado à TMA | -R$ 55.800 | -R$ 10.434 | -R$ 8.685 | R$ 4.025 | R$ 24.846 | R$ 47.989 |
+
+**Fluxo acumulado (gráfico em texto, R$ mil; █ positivo, ▒ negativo):**
+
+```
+Ano 0 | ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -55,8
+Ano 1 | ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -67,9
+Ano 2 | ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -79,6
+Ano 3 | ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -73,3
+Ano 4 | ▒▒▒▒▒▒▒▒▒▒▒ -28,3
+Ano 5 | ███████████████████████████ 72,5
+```
 
 Simplificações: valores correntes (TMA nominal), receita pela média de clientes no ano, prejuízo fiscal compensado com o limite informado, depreciação linear sem crédito de impostos quando a alíquota de IRPJ/CSLL é zero.
 
@@ -162,7 +186,7 @@ Orçamento total (BAC): R$ 47.520. Valores de EXEMPLO em R$ por sprint, coerente
 **Leitura final (sprint 12):** IDC = 0,94 (abaixo de 1: gastou mais do que o valor entregue), IDP = 1,00 (no prazo ou adiantado). Variação de custos = -R$ 2.880; variação de prazo = R$ 0.  
 EAC (desvio persistente) = R$ 50.400; EAC (desvio atípico) = R$ 50.400; EAC (IDC×IDP) = R$ 50.400; ETC = R$ 0; VAC = -R$ 2.880.
 
-*Previsão no meio do projeto (sprint 6):* EAC = R$ 51.936 contra o BAC de R$ 47.520 — a coluna EAC mostra como a previsão converge para o custo final.
+*Previsão no meio do projeto (sprint 6):* EAC = R$ 51.936 contra o BAC de R$ 47.520, a coluna EAC mostra como a previsão converge para o custo final.
 
 ## 9. Alternativas de infraestrutura e substituição (Aulas 1, 2, 10 e 11)
 
@@ -223,7 +247,7 @@ Níveis acumulados de investimento em qualidade de testes (custo) versus perdas 
 
 ## 12. Proposta de modelo de negócio
 
-- **Modelo:** SaaS B2B por organização, assinatura mensal (ARPA-base R$ 179), com planos Starter (1 projeto ativo, poucos membros), Pro (projetos ilimitados, pesquisa de avaliação e exportações) e Enterprise (SSO, SLA, suporte dedicado — sob consulta).
+- **Modelo:** SaaS B2B por organização, assinatura mensal (ARPA-base R$ 179), com planos Starter (1 projeto ativo, poucos membros), Pro (projetos ilimitados, pesquisa de avaliação e exportações) e Enterprise (SSO, SLA, suporte dedicado, sob consulta).
 - **Canal e aquisição:** inbound com conteúdo de elicitação de requisitos, parcerias com instituições de ensino (plano educacional gratuito como geração de demanda) e outbound para consultorias e fábricas de software; CAC-alvo de R$ 350 (LTV/CAC = 14,8).
 - **Precificação:** ancorada no valor percebido (seção 3.2) e validada contra o piso de custo + margem.
 - **Alavancas de VPL** (pela sensibilidade): preço, volume de clientes, custos operacionais.
@@ -239,6 +263,12 @@ Níveis acumulados de investimento em qualidade de testes (custo) versus perdas 
 - A hospedagem gratuita não tem SLA; vender como SaaS exige migrar ou contratar suporte.
 - A conta-base considera Simples Nacional; o enquadramento tributário real depende de contador.
 - Fluxos em valores correntes e TMA nominal; sem inflação além do reajuste anual do preço.
+
+## 14. Leitura por perfil de decisor
+
+- **Investidor:** investir R$ 55.800 hoje dá VPL de R$ 1.941 a 16,0% a.a. (TIR 16,7%), com payback descontado de 4,96 anos. O risco principal é a variável preço; no cenário pessimista o VPL é -R$ 95.189.
+- **Product Owner:** o preço de R$ 179/mês dá LTV/CAC de 14,8; a prioridade do roadmap é Templates de projeto (onboarding) (maior WSJF).
+- **Líder técnico:** IDC final 0,94 e IDP 1,00 indicam custo acima do valor entregue e prazo cumprido; a hospedagem de menor custo é VM Oracle Cloud Always Free (atual), e o investimento em qualidade deve parar quando o benefício marginal não cobre o custo.
 
 ---
 *Reprodução:* `python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py --entrada examples/tcc-input.json --saida examples/tcc-valuation-report.md`

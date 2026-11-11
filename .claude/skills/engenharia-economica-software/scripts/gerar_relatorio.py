@@ -88,6 +88,43 @@ def preparar_modelo(entrada: Dict[str, Any]) -> Dict[str, Any]:
     return modelo
 
 
+def semaforo(entrada, modelo, ind, saas, cen):
+    """Critérios do painel de decisão: lista de (critério, resultado, nível, regra); nível = bom|medio|ruim."""
+    det = ind["detalhe"]
+    tma = ind["tma"]
+    capex_ = det["capex"]
+    horiz = modelo["horizonte_anos"]
+    gva_ = entrada.get("gva_sprints")
+    ult = ec.gva_por_sprint(gva_["sprints"], gva_["bac"])[-1] if gva_ else None
+    pb_d = ind["payback_descontado"]
+
+    def nivel(bom, medio):
+        return "bom" if bom else ("medio" if medio else "ruim")
+
+    tir_ = ind["tir"]
+    linhas = [
+        ("VPL > 0", brl(ind["vpl"]),
+         nivel(ind["vpl"] > 0.05 * capex_, abs(ind["vpl"]) <= 0.05 * capex_), "bom se > 5% do investimento"),
+        ("TIR > TMA", f"{pct(tir_)} vs {pct(tma)}",
+         nivel(tir_ is not None and tir_ > tma + 0.03, tir_ is not None and abs(tir_ - tma) <= 0.03),
+         "bom se 3 pontos acima da TMA"),
+        ("Payback descontado no horizonte", anos(pb_d),
+         nivel(pb_d is not None and pb_d <= 0.7 * horiz, pb_d is not None), "bom se em até 70% do horizonte"),
+        ("LTV/CAC ≥ 3", num(saas["ltv_cac"], 1), nivel(saas["ltv_cac"] >= 3, saas["ltv_cac"] >= 1),
+         "referência de mercado"),
+        ("Payback do CAC ≤ 12 meses", f"{num(saas['payback_cac_meses'], 1)} meses",
+         nivel(saas["payback_cac_meses"] <= 12, saas["payback_cac_meses"] <= 18), "recuperação rápida do CAC"),
+        ("Cenário pessimista com VPL ≥ 0", brl(cen["pessimista"]["vpl"]) if "pessimista" in cen else "n/d",
+         nivel("pessimista" in cen and cen["pessimista"]["vpl"] >= 0, False), "resiliência a premissas ruins"),
+    ]
+    if ult:
+        linhas += [
+            ("IDC final ≥ 1", num(ult["idc"], 2), nivel(ult["idc"] >= 1, ult["idc"] >= 0.9), "custo versus valor entregue"),
+            ("IDP final ≥ 1", num(ult["idp"], 2), nivel(ult["idp"] >= 1, ult["idp"] >= 0.9), "prazo versus planejado"),
+        ]
+    return linhas
+
+
 # --------------------------------- relatório -------------------------------- #
 def gerar(entrada: Dict[str, Any]) -> str:
     proj = entrada["projeto"]
@@ -97,15 +134,18 @@ def gerar(entrada: Dict[str, Any]) -> str:
     det = ind["detalhe"]
     tma = ind["tma"]
     saas = ec.metricas_saas(modelo)
-    cen = ec.cenarios(modelo)
+    cen_lista = ec.cenarios(modelo)
+    cen = {c["cenario"]: c for c in cen_lista}
     sens = ec.sensibilidade(modelo)
     f_eq = ec.fator_equilibrio(modelo)
     f_eq_preco = ec.fator_equilibrio(modelo, "fator_preco")
+    gva_ = entrada.get("gva_sprints")
+    ult = ec.gva_por_sprint(gva_["sprints"], gva_["bac"])[-1] if gva_ else None
     viavel = ind["vpl"] > 0 and (ind["tir"] is not None and ind["tir"] > tma)
     L: List[str] = []
     add = L.append
 
-    add(f"# Relatório de valoração econômica — {proj['nome']}\n")
+    add(f"# Relatório de valoração econômica, {proj['nome']}\n")
     add("> Gerado pela skill `engenharia-economica-software` (cálculos determinísticos em `scripts/econ_core.py`).")
     add("> **Aviso:** todos os valores de mercado e de esforço são **premissas estimadas** listadas na seção 13; "
         "o resultado é tão confiável quanto essas premissas.\n")
@@ -115,10 +155,10 @@ def gerar(entrada: Dict[str, Any]) -> str:
     marginal = abs(ind["vpl"]) <= 0.05 * det["capex"]
     if viavel:
         veredito = ("**VIÁVEL** nas premissas do caso-base: VPL positivo e TIR acima da TMA"
-                    + (" — porém **no limite** (|VPL| ≤ 5% do investimento): pequenas mudanças de premissa invertem a decisão." if marginal else "."))
+                    + (", porém **no limite** (|VPL| ≤ 5% do investimento): pequenas mudanças de premissa invertem a decisão." if marginal else "."))
     elif marginal:
         veredito = ("**NO LIMITE DA VIABILIDADE (levemente negativo)** no caso-base: VPL ≤ 0 e TIR abaixo da TMA, mas |VPL| ≤ 5% do "
-                    "investimento — dentro da margem de erro das premissas. A decisão depende dos cenários e das alavancas da seção 6.")
+                    "investimento, dentro da margem de erro das premissas. A decisão depende dos cenários e das alavancas da seção 6.")
     else:
         veredito = ("**NÃO VIÁVEL no caso-base** no horizonte analisado: VPL ≤ 0 ou TIR abaixo da TMA. "
                     "Ver cenários, ponto de equilíbrio e alavancas na seção 6.")
@@ -135,6 +175,11 @@ def gerar(entrada: Dict[str, Any]) -> str:
         ["ROI descontado (VPL / VP das saídas)", pct(ind["roi_descontado"])],
         ["Fluxo acumulado nominal em " + str(modelo["horizonte_anos"]) + " anos", brl(sum(ind["fluxo"]))],
     ]))
+    add("")
+    add("**Painel de decisão** (semáforo calculado dos números; ✅ bom, ⚠️ atenção, ❌ crítico):\n")
+    icone = {"bom": "✅", "medio": "⚠️", "ruim": "❌"}
+    linhas_sem = [[c, r, icone[n], regra] for c, r, n, regra in semaforo(entrada, modelo, ind, saas, cen)]
+    add(tabela(["Critério", "Resultado", "Sinal", "Regra"], linhas_sem))
     add("")
     if f_eq is not None:
         add(f"**Ponto de equilíbrio:** com os demais parâmetros fixos, o VPL zera com "
@@ -162,7 +207,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
             f"{m['testes_backend_readme']} testes de backend, {m['verificacoes_api_e2e_readme']} verificações de API e "
             f"{m['testes_ui_e2e_readme']} testes de interface.  ")
         add(f"Referência COCOMO básico (modo orgânico): {num(coc['esforco_pessoa_mes'], 1)} pessoa-mês e "
-            f"{num(coc['prazo_meses'], 1)} meses — o esforço declarado ({num(cd['horas'], 0)} h ≈ "
+            f"{num(coc['prazo_meses'], 1)} meses, o esforço declarado ({num(cd['horas'], 0)} h ≈ "
             f"{num(cd['horas'] / 160, 1)} pessoa-mês) fica bem abaixo, coerente com o uso de frameworks e ferramentas "
             f"modernas, mas é um ponto a defender (seção 13).\n")
 
@@ -176,7 +221,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
     if cd["custo_real_gva"] is not None:
         desvio = cd["custo_real_gva"] / cd["direto_orcado"] - 1
         add(f"Custo real acumulado nas sprints (CR): **{brl(cd['custo_real_gva'])}** "
-            f"({pct(desvio)} sobre o orçamento) — usado como investimento direto no modelo.\n")
+            f"({pct(desvio)} sobre o orçamento), usado como investimento direto no modelo.\n")
     add(tabela(["Item de investimento (CapEx, ano 0)", "Valor", "Natureza"], [
         ["Mão de obra direta", brl(cd["direto"]), "Direto"],
         ["Custos indiretos rateados por horas", brl(cd["indireto"]), "Indireto (rateio)"],
@@ -210,7 +255,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
         add(f"**Valor percebido pelo cliente:** uma organização que gasta {vp_['horas_retrabalho_por_mes_organizacao']} h/mês em "
             f"retrabalho de requisitos a {brl(vp_['custo_hora'])}/h e reduz {pct(vp_['reducao_esperada'], 0)} "
             f"economiza **{brl(valor)}/mês**. O preço de {brl(saas['arpa_mensal'])} captura "
-            f"{pct(saas['arpa_mensal'] / valor, 0)} desse valor — {'preço ancorado no valor, abaixo do valor entregue' if saas['arpa_mensal'] < valor else 'ATENÇÃO: preço acima do valor percebido'}.\n")
+            f"{pct(saas['arpa_mensal'] / valor, 0)} desse valor, {'preço ancorado no valor, abaixo do valor entregue' if saas['arpa_mensal'] < valor else 'ATENÇÃO: preço acima do valor percebido'}.\n")
 
     # 4 Fluxo de caixa
     add("## 4. Demonstrativo e fluxo de caixa (Aulas 3 e 5)\n")
@@ -235,14 +280,22 @@ def gerar(entrada: Dict[str, Any]) -> str:
         ["(−) Investimento (CapEx)", brl(-det["capex"])] + [""] * len(L_),
         ["**Fluxo de caixa líquido**", f"**{brl(ind['fluxo'][0])}**"] + [f"**{brl(l['fluxo_liquido'])}**" for l in L_],
     ]))
-    acum, ac_l = 0.0, []
+    acum, ac_l, ac_v = 0.0, [], []
     for f in ind["fluxo"]:
         acum += f
         ac_l.append(brl(acum))
+        ac_v.append(acum)
     add("\n" + tabela(["", "Ano 0"] + [f"Ano {l['ano']}" for l in L_],
                       [["Fluxo acumulado", ac_l[0]] + ac_l[1:],
                        ["Fluxo descontado à TMA", brl(ind["fluxo"][0])] +
                        [brl(f / (1 + tma) ** (t + 1)) for t, f in enumerate(ind["fluxo"][1:])]]))
+    maxabs = max(abs(v) for v in ac_v) or 1.0
+    add("\n**Fluxo acumulado (gráfico em texto, R$ mil; █ positivo, ▒ negativo):**\n")
+    add("```")
+    for t_, v in enumerate(ac_v):
+        barra = ("█" if v >= 0 else "▒") * max(1, int(round(abs(v) / maxabs * 30)))
+        add(f"Ano {t_} | {barra} " + num(v / 1000, 1))
+    add("```")
     add("\nSimplificações: valores correntes (TMA nominal), receita pela média de clientes no ano, prejuízo fiscal "
         "compensado com o limite informado, depreciação linear sem crédito de impostos quando a alíquota de IRPJ/CSLL é zero.\n")
 
@@ -269,7 +322,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
     add("## 6. Cenários, sensibilidade e equilíbrio (Aulas 7 e 8)\n")
     add(tabela(["Cenário", "VPL", "TIR", "Payback simples", "Payback descontado"],
                [[c["cenario"], brl(c["vpl"]), pct(c["tir"]), anos(c["payback_simples"]), anos(c["payback_descontado"])]
-                for c in cen]))
+                for c in cen_lista]))
     add("\n**Sensibilidade (tornado, ±20% em cada fator, VPL):**\n")
     nomes = {"fator_clientes": "Volume de clientes", "fator_preco": "Preço", "fator_custos": "Custos operacionais",
              "fator_capex": "Investimento inicial", "tma": "TMA"}
@@ -311,7 +364,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
             f"EAC (IDC×IDP) = {brl(u['eac_idc_idp'])}; ETC = {brl(u['etc'])}; VAC = {brl(u['vac'])}.\n")
         meio = serie[len(serie) // 2 - 1]
         add(f"*Previsão no meio do projeto (sprint {meio['sprint']}):* EAC = {brl(meio['eac'])} contra o BAC de "
-            f"{brl(gva['bac'])} — a coluna EAC mostra como a previsão converge para o custo final.\n")
+            f"{brl(gva['bac'])}, a coluna EAC mostra como a previsão converge para o custo final.\n")
 
     # 9 Alternativas de infraestrutura
     alt = entrada.get("alternativas_infraestrutura")
@@ -363,7 +416,7 @@ def gerar(entrada: Dict[str, Any]) -> str:
     add("## 12. Proposta de modelo de negócio\n")
     add(f"- **Modelo:** SaaS B2B por organização, assinatura mensal (ARPA-base {brl(saas['arpa_mensal'])}), com planos "
         "Starter (1 projeto ativo, poucos membros), Pro (projetos ilimitados, pesquisa de avaliação e exportações) e "
-        "Enterprise (SSO, SLA, suporte dedicado — sob consulta).")
+        "Enterprise (SSO, SLA, suporte dedicado, sob consulta).")
     add("- **Canal e aquisição:** inbound com conteúdo de elicitação de requisitos, parcerias com instituições de ensino "
         "(plano educacional gratuito como geração de demanda) e outbound para consultorias e fábricas de software; "
         f"CAC-alvo de {brl(saas['cac'])} (LTV/CAC = {num(saas['ltv_cac'], 1)}).")
@@ -378,6 +431,24 @@ def gerar(entrada: Dict[str, Any]) -> str:
     add(f"- TMA: {modelo.get('tma_justificativa', 'premissa informada')}")
     for h in entrada.get("hipoteses_e_riscos", []):
         add(f"- {h}")
+    add("")
+    # 14 Leitura por perfil
+    add("## 14. Leitura por perfil de decisor\n")
+    maior = nomes.get(sens[0]["fator"], sens[0]["fator"]).lower()
+    pess = brl(cen["pessimista"]["vpl"]) if "pessimista" in cen else "n/d"
+    add(f"- **Investidor:** investir {brl(det['capex'])} hoje dá VPL de {brl(ind['vpl'])} a {pct(tma)} a.a. "
+        f"(TIR {pct(ind['tir'])}), com payback descontado de {anos(ind['payback_descontado'])}. "
+        f"O risco principal é a variável {maior}; no cenário pessimista o VPL é {pess}.")
+    top = ec.priorizar(entrada["backlog_roadmap"], "wsjf")[0]["nome"] if entrada.get("backlog_roadmap") else "definir o backlog"
+    add(f"- **Product Owner:** o preço de {brl(saas['arpa_mensal'])}/mês dá LTV/CAC de {num(saas['ltv_cac'], 1)}; "
+        f"a prioridade do roadmap é {top} (maior WSJF).")
+    if ult:
+        melhor = (ec.comparar_alternativas(tma, entrada["alternativas_infraestrutura"]["alternativas"])[0]["nome"]
+                  if entrada.get("alternativas_infraestrutura") else "a definir")
+        add(f"- **Líder técnico:** IDC final {num(ult['idc'], 2)} e IDP {num(ult['idp'], 2)} indicam "
+            f"{'custo acima do valor entregue' if ult['idc'] < 1 else 'custo sob controle'} e "
+            f"{'atraso' if ult['idp'] < 1 else 'prazo cumprido'}; a hospedagem de menor custo é {melhor}, "
+            f"e o investimento em qualidade deve parar quando o benefício marginal não cobre o custo.")
     add("")
     add("---\n*Reprodução:* `python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py --entrada examples/tcc-input.json --saida examples/tcc-valuation-report.md`")
     return "\n".join(L) + "\n"
