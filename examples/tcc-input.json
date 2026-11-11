@@ -18,121 +18,28 @@
       "testes_ui_e2e_readme": 70,
       "requisitos_projeto_demo": 27
     },
-    "origem_dos_numeros": "As métricas do repositório foram contadas por leitura do código do TCC. A equipe é de 3 pessoas, usou ferramentas gratuitas e pouco Claude pago; a maior parte das horas foi de testes manuais; as sprints foram planejadas com o orientador (prof. Reinaldo). Por ser um trabalho acadêmico, horas, custo/hora, preço, clientes, churn, custos de operação, TMA e os valores por sprint do GVA são PREMISSAS DE EXEMPLO coerentes com esse contexto, e não registros contábeis. Substitua-os se houver dados reais."
+    "origem_dos_numeros": "MEDIDO no repositório do TCC: tamanho do código e testes (leitura dos arquivos) e histórico de commits e pull requests (API pública do GitHub, snapshot em examples/dados/). A equipe é de 3 pessoas, usou ferramentas gratuitas e pouco Claude pago, e planejou as sprints com o orientador. ESTIMADO: horas totais (horas medidas por commit divididas pela cobertura de 20%), custo por hora, preço, clientes, CAC e custos de operação, ancorados em fontes públicas listadas na seção 15 do relatório."
   },
   "desenvolvimento": {
-    "periodo": "24 semanas (12 sprints de 2 semanas, planejadas com o orientador)",
-    "equipe": [
-      {
-        "papel": "Desenvolvedor full stack / arquitetura",
-        "horas": 288,
-        "custo_hora": 60
-      },
-      {
-        "papel": "Desenvolvedor backend / DevOps",
-        "horas": 288,
-        "custo_hora": 55
-      },
-      {
-        "papel": "Desenvolvedor frontend / testes",
-        "horas": 288,
-        "custo_hora": 50
-      }
-    ],
+    "periodo": "34 semanas (10/03 a 02/11/2026), 17 janelas de 2 semanas",
+    "equipe_do_historico": true,
+    "papel_equipe": "Equipe de 3 pessoas (horas estimadas a partir do histórico do GitHub)",
     "encargos": 0.0,
     "custos_indiretos": {
       "total_periodo": 1400,
-      "horas_totais_base_rateio": 864,
-      "descricao": "Ferramentas majoritariamente gratuitas (GitHub, VM Oracle Always Free, IDEs). Inclui cerca de R$ 1.320 de assinatura paga de IA (Claude) no período e domínio. Rateado pelas horas do projeto."
+      "horas_totais_base_rateio": 517.5,
+      "descricao": "Ferramentas majoritariamente gratuitas (GitHub, VM Oracle Always Free, IDEs). Inclui cerca de R$ 1.320 de assinatura paga de IA (Claude) e domínio. Atribuído integralmente ao projeto."
     },
     "outros_investimentos": {
       "Lançamento e adequação jurídica (LGPD, termos de uso, marca)": 4000
     },
     "usar_custo_real_do_gva": true,
-    "nota": "Horas de 12 h/semana por pessoa (3 pessoas × 24 semanas). Custo/hora de mercado de nível júnior/pleno, que valora o esforço mesmo sem desembolso. Com usar_custo_real_do_gva = true, a mão de obra direta do investimento é o custo real (CR) das sprints."
-  },
-  "gva_sprints": {
-    "nota": "Valores de EXEMPLO em R$ por sprint, coerentes com 3 pessoas e muitas horas de teste manual (retrabalho no início eleva o custo real). Substitua pelos registros do quadro, se houver. planejado = valor planejado (VP/PV); agregado = valor agregado (VA/EV, escopo realmente entregue valorizado ao custo orçado); real = custo real (CR/AC).",
-    "bac": 47520,
-    "sprints": [
-      {
-        "sprint": 1,
-        "planejado": 3960,
-        "agregado": 2600,
-        "real": 3300
-      },
-      {
-        "sprint": 2,
-        "planejado": 3960,
-        "agregado": 3500,
-        "real": 4000
-      },
-      {
-        "sprint": 3,
-        "planejado": 3960,
-        "agregado": 3900,
-        "real": 4200
-      },
-      {
-        "sprint": 4,
-        "planejado": 3960,
-        "agregado": 4100,
-        "real": 4300
-      },
-      {
-        "sprint": 5,
-        "planejado": 3960,
-        "agregado": 4200,
-        "real": 4400
-      },
-      {
-        "sprint": 6,
-        "planejado": 3960,
-        "agregado": 4300,
-        "real": 4500
-      },
-      {
-        "sprint": 7,
-        "planejado": 3960,
-        "agregado": 4300,
-        "real": 4400
-      },
-      {
-        "sprint": 8,
-        "planejado": 3960,
-        "agregado": 4000,
-        "real": 4300
-      },
-      {
-        "sprint": 9,
-        "planejado": 3960,
-        "agregado": 4100,
-        "real": 4300
-      },
-      {
-        "sprint": 10,
-        "planejado": 3960,
-        "agregado": 4300,
-        "real": 4400
-      },
-      {
-        "sprint": 11,
-        "planejado": 3960,
-        "agregado": 4200,
-        "real": 4300
-      },
-      {
-        "sprint": 12,
-        "planejado": 3960,
-        "agregado": 4020,
-        "real": 4000
-      }
-    ]
+    "nota": "Horas estimadas = horas medidas pelo git-hours ÷ cobertura de 20% (commits capturam só parte do esforço: pesquisa, testes manuais, reuniões e planejamento não geram commit). Custo/hora com base na faixa salarial de mercado e fator de senioridade (seção 15). Com usar_custo_real_do_gva = true, a mão de obra direta do investimento é o custo real (CR) acumulado das janelas."
   },
   "modelo": {
     "horizonte_anos": 5,
-    "tma": 0.16,
-    "tma_justificativa": "Premissa acadêmica: taxa básica de juros de referência + prêmio de risco de produto digital em estágio inicial (cerca de 16 % a.a.). Atualizar com a taxa vigente.",
+    "tma": 0.17,
+    "tma_justificativa": "Selic de 13,75% a.a. (Copom, nov/2026, a confirmar no site do Banco Central) + prêmio de risco de produto digital em estágio inicial de cerca de 3,25 pontos percentuais = 17% a.a.",
     "ajustes": {
       "fator_clientes": 1.0,
       "fator_preco": 1.0,
@@ -175,11 +82,11 @@
           30000
         ],
         "manutencao_evolutiva_120h": [
-          6600,
-          9900,
-          13200,
-          13200,
-          13200
+          6000,
+          9000,
+          12000,
+          12000,
+          12000
         ],
         "marketing_fixo": [
           3000,
@@ -193,10 +100,10 @@
       "cac": 350
     },
     "tributos": {
-      "sobre_receita": 0.06,
+      "sobre_receita": 0.07,
       "ir_csll": 0.0,
       "limite_compensacao_prejuizo": 0.3,
-      "nota": "Caso-base: Simples Nacional (alíquota efetiva ~6 % sobre a receita, já inclui IRPJ/CSLL). O cenário lucro_real usa PIS/COFINS/ISS e 34 % de IRPJ/CSLL sobre o lucro, para mostrar o efeito da depreciação."
+      "nota": "Caso-base: Simples Nacional, Anexo III (exige Fator R ≥ 28%): 6% na faixa até R$ 180 mil e alíquota efetiva próxima de 7% entre R$ 180 e 360 mil. O cenário simples_anexo_v usa 15,5% (Anexo V, serviços de TI com Fator R < 28%). O cenário lucro_real usa PIS/COFINS/ISS e 34% de IRPJ/CSLL sobre o lucro."
     },
     "cenarios": {
       "pessimista": {
@@ -225,6 +132,11 @@
         "horizonte_anos": 7,
         "investimento": {
           "vida_util_anos": 5
+        }
+      },
+      "simples_anexo_v": {
+        "tributos": {
+          "sobre_receita": 0.155
         }
       }
     }
@@ -386,12 +298,373 @@
     ]
   },
   "hipoteses_e_riscos": [
-    "Trabalho acadêmico: nenhum número de mercado (preço, clientes, churn, CAC, suporte) foi validado com clientes pagantes; são premissas de exemplo.",
-    "O custo/hora é de mercado (valoração do esforço), não um desembolso: a equipe de 3 estudantes não foi remunerada.",
-    "A maior parte das horas foi de testes manuais; isso aumenta o custo real (IDC < 1) e é um ponto de melhoria (automatizar) discutido em 'bom o suficiente'.",
-    "Os dados de GVA por sprint são ilustrativos; as sprints foram planejadas com o orientador e podem ser substituídas pelos registros reais.",
+    "Preço, clientes, churn e CAC são premissas ancoradas em fontes públicas, mas não validadas com clientes pagantes.",
+    "As horas medidas (103,5 h) são um piso derivado dos horários dos commits; a cobertura de 20% (horas estimadas = 517,5 h) é premissa e entra na sensibilidade do investimento.",
+    "Luiz Fernando não tem commits no repositório; o esforço dele (pesquisa, testes manuais, documentação) está embutido na cobertura de 20% e não em horas próprias.",
+    "O plano das sprints com o orientador não estava disponível: o valor planejado é linear, com 6 horas por semana por pessoa. Substitua pelo plano real para um GVA exato.",
+    "O custo por hora de mercado valora o esforço (custo de oportunidade), não é desembolso: a equipe não foi remunerada.",
     "A hospedagem gratuita não tem SLA; vender como SaaS exige migrar ou contratar suporte.",
-    "A conta-base considera Simples Nacional; o enquadramento tributário real depende de contador.",
+    "O enquadramento tributário real depende de contador; o cenário simples_anexo_v mostra o risco de cair no Anexo V.",
     "Fluxos em valores correntes e TMA nominal; sem inflação além do reajuste anual do preço."
-  ]
+  ],
+  "historico": {
+    "fonte": "https://github.com/GubioGarcia/Plataforma-Governanca-Software",
+    "periodo": {
+      "inicio": "2026-03-10",
+      "fim": "2026-11-02",
+      "semanas": 33.9
+    },
+    "commits": 132,
+    "prs_total": 30,
+    "prs_entregues": 26,
+    "autores": [
+      {
+        "autor": "GubioGarcia",
+        "commits": 123,
+        "dias_ativos": 34,
+        "horas_medidas": 94.4
+      },
+      {
+        "autor": "ThiagoFalcone",
+        "commits": 9,
+        "dias_ativos": 4,
+        "horas_medidas": 9.1
+      }
+    ],
+    "parametros": {
+      "gap_min": 120,
+      "bonus_min": 120,
+      "cobertura": 0.2,
+      "janela_dias": 14,
+      "pessoas": 3,
+      "horas_semana_pessoa_planejadas": 6.0,
+      "custo_hora": 50.0
+    },
+    "horas_medidas": 103.5,
+    "horas_estimadas": 517.5,
+    "janelas": [
+      {
+        "sprint": 1,
+        "inicio": "2026-03-10",
+        "commits": 10,
+        "horas_medidas": 2.8,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 2,
+        "inicio": "2026-03-24",
+        "commits": 6,
+        "horas_medidas": 8.2,
+        "prs_entregues": [
+          1
+        ],
+        "peso_entregue": 0.0361
+      },
+      {
+        "sprint": 3,
+        "inicio": "2026-04-07",
+        "commits": 10,
+        "horas_medidas": 8.6,
+        "prs_entregues": [
+          4,
+          3,
+          2
+        ],
+        "peso_entregue": 0.0496
+      },
+      {
+        "sprint": 4,
+        "inicio": "2026-04-21",
+        "commits": 3,
+        "horas_medidas": 6.0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 5,
+        "inicio": "2026-05-05",
+        "commits": 3,
+        "horas_medidas": 6.0,
+        "prs_entregues": [
+          5
+        ],
+        "peso_entregue": 0.1359
+      },
+      {
+        "sprint": 6,
+        "inicio": "2026-05-19",
+        "commits": 4,
+        "horas_medidas": 7.3,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 7,
+        "inicio": "2026-06-02",
+        "commits": 7,
+        "horas_medidas": 5.0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 8,
+        "inicio": "2026-06-16",
+        "commits": 0,
+        "horas_medidas": 0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 9,
+        "inicio": "2026-06-30",
+        "commits": 0,
+        "horas_medidas": 0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 10,
+        "inicio": "2026-07-14",
+        "commits": 0,
+        "horas_medidas": 0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 11,
+        "inicio": "2026-07-28",
+        "commits": 0,
+        "horas_medidas": 0,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 12,
+        "inicio": "2026-08-11",
+        "commits": 2,
+        "horas_medidas": 2.4,
+        "prs_entregues": [],
+        "peso_entregue": 0.0
+      },
+      {
+        "sprint": 13,
+        "inicio": "2026-08-25",
+        "commits": 10,
+        "horas_medidas": 12.3,
+        "prs_entregues": [
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "peso_entregue": 0.2438
+      },
+      {
+        "sprint": 14,
+        "inicio": "2026-09-08",
+        "commits": 3,
+        "horas_medidas": 4.2,
+        "prs_entregues": [
+          13
+        ],
+        "peso_entregue": 0.0409
+      },
+      {
+        "sprint": 15,
+        "inicio": "2026-09-22",
+        "commits": 16,
+        "horas_medidas": 11.0,
+        "prs_entregues": [
+          14
+        ],
+        "peso_entregue": 0.0048
+      },
+      {
+        "sprint": 16,
+        "inicio": "2026-10-06",
+        "commits": 26,
+        "horas_medidas": 13.2,
+        "prs_entregues": [
+          17,
+          15
+        ],
+        "peso_entregue": 0.2919
+      },
+      {
+        "sprint": 17,
+        "inicio": "2026-10-20",
+        "commits": 32,
+        "horas_medidas": 16.6,
+        "prs_entregues": [
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18
+        ],
+        "peso_entregue": 0.1969
+      }
+    ],
+    "gva_sprints": {
+      "bac": 30471.43,
+      "sprints": [
+        {
+          "sprint": 1,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 699.86
+        },
+        {
+          "sprint": 2,
+          "planejado": 1792.44,
+          "agregado": 1099.45,
+          "real": 2037.85
+        },
+        {
+          "sprint": 3,
+          "planejado": 1792.44,
+          "agregado": 1511.95,
+          "real": 2150.56
+        },
+        {
+          "sprint": 4,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 1500.0
+        },
+        {
+          "sprint": 5,
+          "planejado": 1792.44,
+          "agregado": 4142.44,
+          "real": 1500.0
+        },
+        {
+          "sprint": 6,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 1831.67
+        },
+        {
+          "sprint": 7,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 1248.54
+        },
+        {
+          "sprint": 8,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 0.0
+        },
+        {
+          "sprint": 9,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 0.0
+        },
+        {
+          "sprint": 10,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 0.0
+        },
+        {
+          "sprint": 11,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 0.0
+        },
+        {
+          "sprint": 12,
+          "planejado": 1792.44,
+          "agregado": 0.0,
+          "real": 591.53
+        },
+        {
+          "sprint": 13,
+          "planejado": 1792.44,
+          "agregado": 7429.56,
+          "real": 3068.75
+        },
+        {
+          "sprint": 14,
+          "planejado": 1792.44,
+          "agregado": 1247.61,
+          "real": 1038.12
+        },
+        {
+          "sprint": 15,
+          "planejado": 1792.44,
+          "agregado": 145.92,
+          "real": 2743.68
+        },
+        {
+          "sprint": 16,
+          "planejado": 1792.44,
+          "agregado": 8893.25,
+          "real": 3310.28
+        },
+        {
+          "sprint": 17,
+          "planejado": 1792.44,
+          "agregado": 6001.23,
+          "real": 4145.0
+        }
+      ]
+    }
+  },
+  "fontes_mercado": [
+    {
+      "tema": "Taxa básica de juros (base da TMA)",
+      "dado": "Selic de 13,75% a.a. mantida pelo Copom em novembro de 2026; antes, 15% (jan/2026) e 14% (ago/2026)",
+      "fonte": "JB Economia; Infomoney",
+      "url": "https://www.infomoney.com.br/economia/banco-central-copom-decisao-selic-05082026/",
+      "confianca": "média: notícias; confirmar no comunicado do Copom em bcb.gov.br"
+    },
+    {
+      "tema": "Custo por hora da equipe",
+      "dado": "Desenvolvedor pleno: mediana de R$ 11.350 (Brasília, back-end) a R$ 12.000 (Porto Alegre e Curitiba) por mês, ou cerca de R$ 71 a 75 por hora; com fator de senioridade de 0,7 para equipe estudantil, R$ 50 por hora",
+      "fonte": "Robert Half, tabelas salariais por cidade",
+      "url": "https://www.roberthalf.com/br/pt/vagas-detalhes/desenvolvedora-back-end-pleno/brasilia",
+      "confianca": "média: faixas por cidade, amostra e data não confirmadas; o fator 0,7 é premissa da equipe"
+    },
+    {
+      "tema": "Preço de referência (concorrente)",
+      "dado": "Jira Standard a cerca de US$ 7,91 por usuário por mês (US$ 79 para 10 usuários); o preço de R$ 179 por organização é plano único para a equipe",
+      "fonte": "Atlassian e blogs de preços (valores divergem por faixa de usuários)",
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "confianca": "média: página oficial inconsistente nas buscas; conferir o valor vigente"
+    },
+    {
+      "tema": "Churn mensal",
+      "dado": "SaaS B2B para pequenas e médias empresas: 3% a 5% ao mês é típico, 2,5% a 5% é considerado bom; o modelo usa 3%",
+      "fonte": "Lenny's Newsletter e blogs de benchmarks",
+      "url": "https://www.lennysnewsletter.com/p/monthly-churn-benchmarks",
+      "confianca": "baixa a média: fontes secundárias que citam umas às outras"
+    },
+    {
+      "tema": "Tributação",
+      "dado": "Simples Nacional Anexo III: 6% até R$ 180 mil de receita em 12 meses e 11,2% com dedução de R$ 9.360 até R$ 360 mil; serviços de TI com Fator R abaixo de 28% caem no Anexo V (15,5%)",
+      "fonte": "Agilize e Conta Azul (tabelas do Simples Nacional); LC 123/2006",
+      "url": "https://agilize.com.br/artigos/?p=470",
+      "confianca": "média: confirmar com contador"
+    },
+    {
+      "tema": "Hospedagem gratuita",
+      "dado": "VM Oracle Cloud Always Free sem custo de infraestrutura e sem SLA contratual (README e deploy do próprio TCC)",
+      "fonte": "Repositório do TCC",
+      "url": "https://github.com/GubioGarcia/Plataforma-Governanca-Software",
+      "confianca": "alta (medido)"
+    }
+  ],
+  "data_consulta_fontes": "11/11/2026"
 }

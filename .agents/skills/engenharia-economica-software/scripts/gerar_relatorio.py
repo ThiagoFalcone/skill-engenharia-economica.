@@ -52,7 +52,28 @@ def tabela(cabecalho: List[str], linhas: List[List[str]]) -> str:
 
 
 # ------------------------------- preparação -------------------------------- #
+def normalizar(entrada):
+    """Preenche equipe e GVA a partir de ``historico`` (saída de historico_git.py), se presente."""
+    h = entrada.get("historico")
+    if not h:
+        return entrada
+    e = dict(entrada)
+    dev = dict(e["desenvolvimento"])
+    if dev.get("equipe_do_historico") and "equipe" not in dev:
+        dev["equipe"] = [{"papel": dev.get("papel_equipe", "Equipe (horas estimadas pelo histórico)"),
+                          "horas": h["horas_estimadas"], "custo_hora": h["parametros"]["custo_hora"]}]
+    e["desenvolvimento"] = dev
+    if "gva_sprints" not in e:
+        nota = (f"Dados do histórico do GitHub ({h['periodo']['inicio']} a {h['periodo']['fim']}): custo real = horas medidas por "
+                f"commit ÷ cobertura de {h['parametros']['cobertura'] * 100:.0f}% × custo/hora; valor agregado = pull requests "
+                f"entregues ponderados pelas linhas alteradas; valor planejado linear (plano de "
+                f"{h['parametros']['horas_semana_pessoa_planejadas']:g} h por semana por pessoa, premissa).")
+        e["gva_sprints"] = {"nota": nota, **h["gva_sprints"]}
+    return e
+
+
 def custos_desenvolvimento(entrada: Dict[str, Any]) -> Dict[str, Any]:
+    entrada = normalizar(entrada)
     dev = entrada["desenvolvimento"]
     enc = float(dev.get("encargos", 0.0))
     linhas = []
@@ -90,6 +111,7 @@ def preparar_modelo(entrada: Dict[str, Any]) -> Dict[str, Any]:
 
 def semaforo(entrada, modelo, ind, saas, cen):
     """Critérios do painel de decisão: lista de (critério, resultado, nível, regra); nível = bom|medio|ruim."""
+    entrada = normalizar(entrada)
     det = ind["detalhe"]
     tma = ind["tma"]
     capex_ = det["capex"]
@@ -119,14 +141,15 @@ def semaforo(entrada, modelo, ind, saas, cen):
     ]
     if ult:
         linhas += [
-            ("IDC final ≥ 1", num(ult["idc"], 2), nivel(ult["idc"] >= 1, ult["idc"] >= 0.9), "custo versus valor entregue"),
-            ("IDP final ≥ 1", num(ult["idp"], 2), nivel(ult["idp"] >= 1, ult["idp"] >= 0.9), "prazo versus planejado"),
+            ("IDC final ≥ 1", num(ult["idc"], 2), nivel(ult["idc"] >= 0.995, ult["idc"] >= 0.9), "custo versus valor entregue"),
+            ("IDP final ≥ 1", num(ult["idp"], 2), nivel(ult["idp"] >= 0.995, ult["idp"] >= 0.9), "prazo versus planejado"),
         ]
     return linhas
 
 
 # --------------------------------- relatório -------------------------------- #
 def gerar(entrada: Dict[str, Any]) -> str:
+    entrada = normalizar(entrada)
     proj = entrada["projeto"]
     cd = custos_desenvolvimento(entrada)
     modelo = preparar_modelo(entrada)
@@ -207,21 +230,46 @@ def gerar(entrada: Dict[str, Any]) -> str:
             f"{m['testes_backend_readme']} testes de backend, {m['verificacoes_api_e2e_readme']} verificações de API e "
             f"{m['testes_ui_e2e_readme']} testes de interface.  ")
         add(f"Referência COCOMO básico (modo orgânico): {num(coc['esforco_pessoa_mes'], 1)} pessoa-mês e "
-            f"{num(coc['prazo_meses'], 1)} meses, o esforço declarado ({num(cd['horas'], 0)} h ≈ "
+            f"{num(coc['prazo_meses'], 1)} meses, o esforço estimado ({num(cd['horas'], 0)} h ≈ "
             f"{num(cd['horas'] / 160, 1)} pessoa-mês) fica bem abaixo, coerente com o uso de frameworks e ferramentas "
             f"modernas, mas é um ponto a defender (seção 13).\n")
 
     # 3 Custos
     add("## 3. Custo, preço e valor (Aula 4)\n")
+    hist = entrada.get("historico")
+    if hist:
+        par = hist["parametros"]
+        add("### 3.0 Evidência real: esforço medido no histórico do GitHub\n")
+        add(f"Fonte: {hist['fonte']} (snapshot em `examples/dados/`). Período de {hist['periodo']['inicio']} a "
+            f"{hist['periodo']['fim']} ({num(hist['periodo']['semanas'], 1)} semanas), {hist['commits']} commits e "
+            f"{hist['prs_entregues']} pull requests de entrega (de {hist['prs_total']}, excluídos os de integração).\n")
+        add(tabela(["Autor", "Commits", "Dias ativos", "Horas medidas (git-hours)"],
+                   [[a_["autor"], str(a_["commits"]), str(a_["dias_ativos"]), num(a_["horas_medidas"], 1)] for a_ in hist["autores"]]
+                   + [["**Total medido**", f"**{hist['commits']}**", "", f"**{num(hist['horas_medidas'], 1)}**"]]))
+        add(f"\n**Método:** git-hours (commits com intervalo menor que {par['gap_min']:g} min formam uma sessão; cada sessão ganha "
+            f"{par['bonus_min']:g} min de bônus). As horas medidas são um **piso**: pesquisa, reuniões, testes manuais e planejamento "
+            f"não geram commit. Com cobertura de {par['cobertura'] * 100:.0f}% (premissa), o esforço estimado é "
+            f"**{num(hist['horas_estimadas'], 1)} h** ({num(hist['horas_estimadas'] / par['pessoas'], 0)} h por pessoa), a "
+            f"{brl(par['custo_hora'])}/h = {brl(hist['horas_estimadas'] * par['custo_hora'])}.\n")
+        add(tabela(["Sprint", "Início", "Commits", "Horas medidas", "PRs entregues", "Peso da entrega"],
+                   [[str(j["sprint"]), j["inicio"], str(j["commits"]), num(j["horas_medidas"], 1),
+                     ", ".join("#" + str(n_) for n_ in j["prs_entregues"]) or "nenhum", pct(j["peso_entregue"])]
+                    for j in hist["janelas"]]))
+        sem_commit = [j["sprint"] for j in hist["janelas"] if j["commits"] == 0]
+        if sem_commit:
+            add(f"\nAs janelas {sem_commit[0]} a {sem_commit[-1]} não têm nenhum commit (pausa no desenvolvimento), o que pesa no IDP da seção 8.\n")
     add("### 3.1 Custos diretos e indiretos do desenvolvimento\n")
     add(tabela(["Papel", "Horas", "Custo/hora", "Custo direto"],
                [[l["papel"], num(l["horas"], 0), brl(l["custo_hora"]), brl(l["custo"])] for l in cd["linhas"]]
-               + [["**Total orçado (BAC)**", f"**{num(cd['horas'], 0)}**", "", f"**{brl(cd['direto_orcado'])}**"]]))
+               + [[("**Total estimado**" if entrada.get("historico") else "**Total orçado (BAC)**"), f"**{num(cd['horas'], 0)}**", "",
+                   f"**{brl(cd['direto_orcado'])}**"]]))
     add("")
     if cd["custo_real_gva"] is not None:
-        desvio = cd["custo_real_gva"] / cd["direto_orcado"] - 1
-        add(f"Custo real acumulado nas sprints (CR): **{brl(cd['custo_real_gva'])}** "
-            f"({pct(desvio)} sobre o orçamento), usado como investimento direto no modelo.\n")
+        bac_ref = entrada["gva_sprints"]["bac"] if entrada.get("gva_sprints") else cd["direto_orcado"]
+        desvio = cd["custo_real_gva"] / bac_ref - 1
+        add(f"Custo real acumulado (CR): **{brl(cd['custo_real_gva'])}**, {pct(abs(desvio))} "
+            f"{'abaixo' if desvio < 0 else 'acima'} do orçamento do plano (BAC de {brl(bac_ref)}); "
+            f"usado como investimento direto no modelo.\n")
     add(tabela(["Item de investimento (CapEx, ano 0)", "Valor", "Natureza"], [
         ["Mão de obra direta", brl(cd["direto"]), "Direto"],
         ["Custos indiretos rateados por horas", brl(cd["indireto"]), "Indireto (rateio)"],
@@ -356,9 +404,9 @@ def gerar(entrada: Dict[str, Any]) -> str:
                      num(s["idc"], 2), num(s["idp"], 2), brl(s["eac"])] for s in serie]))
         u = serie[-1]
         add(f"\n**Leitura final (sprint {u['sprint']}):** IDC = {num(u['idc'], 2)} "
-            f"({'abaixo de 1: gastou mais do que o valor entregue' if u['idc'] < 1 else 'eficiente em custo'}), "
+            f"({'abaixo de 1: gastou mais do que o valor entregue' if u['idc'] < 0.995 else 'eficiente em custo'}), "
             f"IDP = {num(u['idp'], 2)} "
-            f"({'atrasado' if u['idp'] < 1 else 'no prazo ou adiantado'}). "
+            f"({'atrasado' if u['idp'] < 0.995 else 'no prazo ou adiantado'}). "
             f"Variação de custos = {brl(u['variacao_custos'])}; variação de prazo = {brl(u['variacao_prazo'])}.  \n"
             f"EAC (desvio persistente) = {brl(u['eac'])}; EAC (desvio atípico) = {brl(u['eac_desvio_atipico'])}; "
             f"EAC (IDC×IDP) = {brl(u['eac_idc_idp'])}; ETC = {brl(u['etc'])}; VAC = {brl(u['vac'])}.\n")
@@ -446,10 +494,18 @@ def gerar(entrada: Dict[str, Any]) -> str:
         melhor = (ec.comparar_alternativas(tma, entrada["alternativas_infraestrutura"]["alternativas"])[0]["nome"]
                   if entrada.get("alternativas_infraestrutura") else "a definir")
         add(f"- **Líder técnico:** IDC final {num(ult['idc'], 2)} e IDP {num(ult['idp'], 2)} indicam "
-            f"{'custo acima do valor entregue' if ult['idc'] < 1 else 'custo sob controle'} e "
-            f"{'atraso' if ult['idp'] < 1 else 'prazo cumprido'}; a hospedagem de menor custo é {melhor}, "
+            f"{'custo acima do valor entregue' if ult['idc'] < 0.995 else 'custo sob controle'} e "
+            f"{'atraso' if ult['idp'] < 0.995 else 'prazo cumprido'}; a hospedagem de menor custo é {melhor}, "
             f"e o investimento em qualidade deve parar quando o benefício marginal não cobre o custo.")
     add("")
+    # 15 Fontes
+    if entrada.get("fontes_mercado"):
+        add("## 15. Fontes e evidências\n")
+        add(f"Consulta às fontes em {entrada.get('data_consulta_fontes', 'data não informada')}. Evidência medida: histórico do GitHub e tamanho do código do TCC. "
+            "Fontes de mercado: valores públicos, com a confiança que o autor atribuiu a cada uma.\n")
+        add(tabela(["Tema", "Dado usado", "Fonte", "Confiança"],
+                   [[f_["tema"], f_["dado"], f"[{f_['fonte']}]({f_['url']})", f_["confianca"]] for f_ in entrada["fontes_mercado"]]))
+        add("")
     add("---\n*Reprodução:* `python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py --entrada examples/tcc-input.json --saida examples/tcc-valuation-report.md`")
     return "\n".join(L) + "\n"
 
