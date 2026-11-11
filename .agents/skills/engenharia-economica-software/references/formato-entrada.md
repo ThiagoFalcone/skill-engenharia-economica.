@@ -55,3 +55,9 @@ Lista de `{nome, valor, esforco, valor_negocio, criticidade_tempo, reducao_risco
 
 ## `hipoteses_e_riscos` (opcional)
 Lista de textos exibidos na seção final.
+
+## `historico` (opcional, saída de `scripts/historico_git.py`)
+Cole o JSON gerado pelo script. Com `desenvolvimento.equipe_do_historico = true` (e `papel_equipe` opcional), a equipe passa a ser uma linha com as horas estimadas e o custo/hora do histórico; se não houver `gva_sprints`, o GVA por sprint também vem do histórico. O relatório ganha a seção 3.0 (evidência real).
+
+## `fontes_mercado` e `data_consulta_fontes` (opcionais)
+Lista de `{tema, dado, fonte, url, confianca}` exibida na seção 15 do relatório, com a data da consulta. Registre de onde veio cada premissa de mercado e o quanto ela é confiável.

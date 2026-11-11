@@ -28,3 +28,12 @@ Use o tamanho para **sanidade** do esforço: `econ_cli.py cocomo --kloc <milhare
 
 ## Fontes de mercado (citar no relatório)
 Custo/hora: pesquisas salariais de TI (guias de remuneração, Glassdoor, Robert Half), convertidas para custo/hora (÷ ~160 h/mês, + encargos se CLT). Preço: concorrentes diretos e planos públicos. Juros: Selic/Tesouro vigentes. Tributos: tabela do Simples Nacional/contador. Sempre indique data da consulta.
+
+## Esforço real a partir do histórico do GitHub
+Quando o projeto tem repositório, o esforço deixa de ser chute: `python scripts/historico_git.py --repo dono/nome --cache pasta --saida historico.json` baixa commits e pull requests e calcula:
+- **Horas medidas** pelo método git-hours (commits do mesmo autor com intervalo menor que 120 minutos formam uma sessão; cada sessão ganha 120 minutos de bônus). É um **piso**, pois pesquisa, reuniões, testes manuais e planejamento não geram commit.
+- **Horas estimadas** = horas medidas ÷ `--cobertura` (fração do esforço que gera commit; premissa, padrão 20%). Mostre a sensibilidade do investimento a essa premissa.
+- **Sprints** em janelas de 14 dias, com **valor agregado** pelos pull requests entregues (ponderados pelas linhas alteradas, ignorando merges e releases) e **custo real** pelas horas da janela.
+- **Valor planejado** linear, a partir de `--horas-semana-pessoa` (plano da equipe). Se existir o plano real das sprints, substitua.
+
+Limitações a declarar: quem não faz commit (testes manuais, pesquisa, documentação) não aparece nas horas medidas; histórico com squash ou commits grandes subestima o esforço; o plano linear é uma simplificação. Sem rede, use `--cache` com os arquivos `commits.json` e `prs.json` já baixados.
