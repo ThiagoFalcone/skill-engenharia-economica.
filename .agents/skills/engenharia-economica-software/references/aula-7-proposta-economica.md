@@ -1,4 +1,4 @@
-# Aula 7 — Propostas econômicas de software
+# Aula 7: Propostas econômicas de software
 
 Objetivo: permitir que uma pessoa que decide (diretoria, investidor, cliente) aprove ou recuse com base em números e riscos **transparentes**.
 
@@ -8,7 +8,7 @@ Objetivo: permitir que uma pessoa que decide (diretoria, investidor, cliente) ap
 3. **Decisão pedida** (o que se quer aprovar) e a alternativa "não fazer".
 4. **Cenários** (pessimista, base, otimista) lado a lado.
 5. **Principais riscos** e como mitigar; **hipóteses** que, se falsas, derrubam o resultado.
-6. **Próximos passos** com marcos (o que validar antes de gastar mais — gates de decisão).
+6. **Próximos passos** com marcos (o que validar antes de gastar mais, gates de decisão).
 
 ## Justificativa de ROI
 - ROI descontado = `VPL / VP das saídas`.

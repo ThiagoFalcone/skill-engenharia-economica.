@@ -1,4 +1,4 @@
-# Aulas 3 e 5 — Valor do dinheiro no tempo (TVM), TMA e fluxo de caixa
+# Aulas 3 e 5: Valor do dinheiro no tempo (TVM), TMA e fluxo de caixa
 
 ## Fórmulas (todas implementadas em `scripts/econ_core.py`)
 | Conceito | Fórmula | Função / comando |

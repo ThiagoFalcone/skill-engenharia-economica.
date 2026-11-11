@@ -1,4 +1,4 @@
-# Aulas 10, 11 e 12 — Estratégia, "bom o suficiente" e priorização
+# Aulas 10, 11 e 12: Estratégia, "bom o suficiente" e priorização
 
 ## Substituição e aposentadoria de componentes legados
 Pergunta: manter, refatorar, substituir ou aposentar? Compare **alternativas com vidas diferentes** pelo **CAUE** (custo anual uniforme equivalente), incluindo:
@@ -22,12 +22,12 @@ Comando: `econ_cli.py suficiente --arquivo niveis.json` (níveis com `custo` e `
 ## Priorização econômica do backlog
 ### Valor × Esforço
 `score = valor / esforço` (valor 1–10 ou R$; esforço em pontos/horas). Quadrantes pela mediana:
-- **quick_win** (alto valor, baixo esforço) — fazer primeiro
-- **projeto_estrategico** (alto valor, alto esforço) — planejar, quebrar em fatias
-- **preenchimento** (baixo valor, baixo esforço) — se sobrar capacidade
+- **quick_win** (alto valor, baixo esforço), fazer primeiro
+- **projeto_estrategico** (alto valor, alto esforço), planejar, quebrar em fatias
+- **preenchimento** (baixo valor, baixo esforço), se sobrar capacidade
 - **evitar** (baixo valor, alto esforço)
 
-### WSJF (Weighted Shortest Job First — Custo do Atraso ÷ Duração)
+### WSJF (Weighted Shortest Job First: Custo do Atraso ÷ Duração)
 `WSJF = (valor de negócio + criticidade de tempo + redução de risco/oportunidade) / tamanho do trabalho`. Favorece itens pequenos e urgentes; reflete o **custo do atraso**.
 
 Comando: `econ_cli.py priorizar --arquivo backlog.json --metodo valor_esforco|wsjf`. Campos: `nome`, `valor`, `esforco` **ou** `valor_negocio`, `criticidade_tempo`, `reducao_risco`, `tamanho`.

@@ -1,4 +1,4 @@
-# Aula 9 — Gerenciamento de Valor Agregado (GVA / EVM) em projetos ágeis
+# Aula 9: Gerenciamento de Valor Agregado (GVA / EVM) em projetos ágeis
 
 ## Termos (PT ↔ EN)
 | Sigla PT | Nome | Sigla EN | Significado |
@@ -28,7 +28,7 @@
 ## Adaptação a sprints
 1. **BAC** = capacidade planejada × custo (ex.: horas da equipe × custo/hora) ou valor do backlog.
 2. **VP da sprint** = valor orçado do escopo comprometido.
-3. **VA da sprint** = valor orçado **somente** do que cumpriu a Definição de Pronto (trabalho parcial vale 0 — evita "90 % pronto").
+3. **VA da sprint** = valor orçado **somente** do que cumpriu a Definição de Pronto (trabalho parcial vale 0, evita "90 % pronto").
 4. **CR da sprint** = horas reais × custo/hora (+ custos diretos).
 5. Acumule por sprint e acompanhe IDC, IDP e EAC. Alternativas: usar *story points* como unidade (VP = pontos planejados, VA = pontos entregues) e converter em R$ pelo custo médio por ponto.
 

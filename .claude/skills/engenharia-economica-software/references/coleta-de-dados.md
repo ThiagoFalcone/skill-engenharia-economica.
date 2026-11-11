@@ -24,7 +24,7 @@ Se o usuário não souber, **proponha valores de mercado conservadores, rotule c
 ## Medir o tamanho do software em um repositório (somente leitura)
 Use contagens simples, sem alterar o projeto: nº de arquivos e linhas de código de produção × testes por linguagem (ex.: `find … -name '*.java' | xargs wc -l`), nº de migrações de banco, nº de módulos/funcionalidades, testes automatizados e CI/CD, infraestrutura (Docker, deploy), README. Exclua dependências e artefatos gerados (`node_modules`, `target`, `dist`).
 
-Use o tamanho para **sanidade** do esforço: `econ_cli.py cocomo --kloc <milhares de linhas>` dá uma referência (COCOMO básico) — costuma superestimar projetos que usam frameworks modernos e IA; justifique a diferença em vez de forçar o número.
+Use o tamanho para **sanidade** do esforço: `econ_cli.py cocomo --kloc <milhares de linhas>` dá uma referência (COCOMO básico), costuma superestimar projetos que usam frameworks modernos e IA; justifique a diferença em vez de forçar o número.
 
 ## Fontes de mercado (citar no relatório)
 Custo/hora: pesquisas salariais de TI (guias de remuneração, Glassdoor, Robert Half), convertidas para custo/hora (÷ ~160 h/mês, + encargos se CLT). Preço: concorrentes diretos e planos públicos. Juros: Selic/Tesouro vigentes. Tributos: tabela do Simples Nacional/contador. Sempre indique data da consulta.

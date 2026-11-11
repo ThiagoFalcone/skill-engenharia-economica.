@@ -1,4 +1,4 @@
-# Aulas 6 e 8 — Viabilidade, valuation, tributos e depreciação
+# Aulas 6 e 8: Viabilidade, valuation, tributos e depreciação
 
 ## Indicadores de viabilidade (determinísticos)
 | Indicador | Fórmula | Regra de decisão | Comando |
@@ -33,11 +33,11 @@ Atenção: LTV/CAC alto com poucos clientes pode refletir CAC subestimado (só m
 
 ## Depreciação de ativos de TI
 Ativos intangíveis (software desenvolvido) e tangíveis (servidores) perdem valor contábil.
-- **Linear:** `(valor − residual)/vida` por ano (`depreciacao_linear`). Referência fiscal usual: equipamentos de informática ≈ 5 anos (20 %/ano); software costuma ser amortizado por prazo de uso estimado — confirme com contador.
+- **Linear:** `(valor − residual)/vida` por ano (`depreciacao_linear`). Referência fiscal usual: equipamentos de informática ≈ 5 anos (20 %/ano); software costuma ser amortizado por prazo de uso estimado, confirme com contador.
 - **Soma dos dígitos:** acelerada (`depreciacao_soma_digitos`).
 - **Depreciação não é desembolso**: reduz o lucro tributável e, portanto, o IR (**escudo fiscal = depreciação × alíquota de IR/CSLL**). Só gera economia se há lucro tributável.
 
-## Tributos (Brasil — simplificado; confirmar com contador)
+## Tributos (Brasil: simplificado; confirmar com contador)
 | Regime | Como entra no modelo |
 |---|---|
 | Simples Nacional | Alíquota efetiva **sobre a receita** (`tributos.sobre_receita`), já inclui IRPJ/CSLL → `ir_csll = 0` |

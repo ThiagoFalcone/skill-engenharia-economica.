@@ -1,12 +1,12 @@
-# Aula 4 — Custo, preço e valor em TI
+# Aula 4: Custo, preço e valor em TI
 
 ## Custo
 | Tipo | Definição | Exemplos | Cálculo |
 |---|---|---|---|
 | **Direto** | Atribuível ao projeto sem rateio | Horas da equipe × custo/hora | `custo_direto_equipe(horas, custo_hora, encargos)` |
 | **Indireto** | Compartilhado; precisa de rateio | Infra, licenças, aluguel, gestão | `rateio_indireto(total, horas_projeto, horas_totais)` |
-| **Fixo** | Não varia com o volume | Hospedagem base, salários | — |
-| **Variável** | Varia com clientes/uso | Gateway de pagamento, storage por cliente | — |
+| **Fixo** | Não varia com o volume | Hospedagem base, salários |, |
+| **Variável** | Varia com clientes/uso | Gateway de pagamento, storage por cliente |, |
 
 Custo/hora de **mercado** valora esforço mesmo quando ninguém foi pago (ex.: TCC): é custo de oportunidade. Diga isso explicitamente. Encargos (CLT ≈ 70–100 %) só se a mão de obra for CLT; PJ/freelancer, 0.
 
@@ -27,7 +27,7 @@ horas de retrabalho evitadas/mês × custo/hora × redução esperada = valor/m�
 ```
 
 ## Custo unitário em SaaS
-`custo unitário/mês = (custos variáveis + fixos + CAC do ano) / (clientes médios × 12)`. É alto no início (poucos clientes diluem custos fixos) e cai com a escala — por isso o preço pode ficar abaixo do custo pleno nos primeiros anos; isso é um **investimento de crescimento**, deve ser explícito.
+`custo unitário/mês = (custos variáveis + fixos + CAC do ano) / (clientes médios × 12)`. É alto no início (poucos clientes diluem custos fixos) e cai com a escala, por isso o preço pode ficar abaixo do custo pleno nos primeiros anos; isso é um **investimento de crescimento**, deve ser explícito.
 
 ## Armadilhas
 - Precificar só por custo ignora a disposição a pagar (deixa dinheiro na mesa ou perde mercado).

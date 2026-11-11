@@ -1,4 +1,4 @@
-# Aulas 1 e 2 — Introdução e processo de decisão
+# Aulas 1 e 2: Introdução e processo de decisão
 
 ## Por que decisões de software são decisões econômicas
 Cada escolha técnica consome recursos escassos (horas, dinheiro, tempo de mercado) e gera benefícios futuros incertos. Engenharia Econômica compara **alternativas** em uma base comum: **valor do dinheiro no tempo** descontado a uma **TMA**.

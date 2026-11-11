@@ -36,7 +36,7 @@ Seções opcionais podem ser omitidas; o relatório pula as seções corresponde
 | `tributos.sobre_receita` | alíquota sobre a receita (Simples/PIS/COFINS/ISS) |
 | `tributos.ir_csll` | alíquota sobre o EBIT positivo (0 no Simples) |
 | `tributos.limite_compensacao_prejuizo` | fração do lucro que pode ser abatida por prejuízo acumulado |
-| `cenarios` | `{nome: override}` — merge profundo no modelo (ex.: `{"ajustes":{"fator_clientes":0.7}}`) |
+| `cenarios` | `{nome: override}`, merge profundo no modelo (ex.: `{"ajustes":{"fator_clientes":0.7}}`) |
 | `tma_justificativa` | texto exibido no relatório |
 
 Para modelar economia de custos (em vez de receita) use `preco_mensal` × `clientes` como "usuários internos beneficiados" ou, mais simples, zere a receita e informe a economia como receita equivalente em um cliente único (`clientes_fim_ano: [1,1,…]`, `preco_mensal` = economia mensal; o ano 1 usa a média de 0,5 cliente, então a economia do primeiro ano é metade).
