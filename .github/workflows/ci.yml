@@ -1,0 +1,25 @@
+name: Testes da skill
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Testes unitários, CLI, estrutura da skill e evals
+        run: python -m unittest discover -s tests -v
+      - name: O relatório versionado está atualizado
+        run: |
+          python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py \
+            --entrada examples/tcc-input.json --saida /tmp/relatorio.md
+          diff -q /tmp/relatorio.md examples/tcc-valuation-report.md

@@ -1,0 +1,397 @@
+{
+  "projeto": {
+    "nome": "Plataforma de Governança de Projetos de Software",
+    "descricao": "SaaS B2B de apoio ao discovery e à elicitação de requisitos: organizações, projetos, requisitos com aprovação formal, rastreabilidade, modelagem de dados, solicitações, auditoria, analytics e pesquisa de avaliação.",
+    "stack": "Java 21 + Spring Boot 4, React 19 + TypeScript, Keycloak, PostgreSQL 15, Docker/Nginx",
+    "hospedagem_atual": "VM Oracle Cloud Always Free com HTTPS (Let's Encrypt)",
+    "metricas_medidas_no_repositorio": {
+      "java_main_arquivos": 91,
+      "java_main_linhas": 6005,
+      "java_teste_arquivos": 13,
+      "java_teste_linhas": 2076,
+      "frontend_ts_tsx_arquivos": 132,
+      "frontend_ts_tsx_linhas": 20397,
+      "migrations_flyway": 6,
+      "arquivos_e2e_playwright": 15,
+      "testes_backend_readme": 284,
+      "verificacoes_api_e2e_readme": 232,
+      "testes_ui_e2e_readme": 70,
+      "requisitos_projeto_demo": 27
+    },
+    "origem_dos_numeros": "As métricas do repositório foram contadas por leitura do código do TCC. A equipe é de 3 pessoas, usou ferramentas gratuitas e pouco Claude pago; a maior parte das horas foi de testes manuais; as sprints foram planejadas com o orientador (prof. Reinaldo). Por ser um trabalho acadêmico, horas, custo/hora, preço, clientes, churn, custos de operação, TMA e os valores por sprint do GVA são PREMISSAS DE EXEMPLO coerentes com esse contexto, e não registros contábeis. Substitua-os se houver dados reais."
+  },
+  "desenvolvimento": {
+    "periodo": "24 semanas (12 sprints de 2 semanas, planejadas com o orientador)",
+    "equipe": [
+      {
+        "papel": "Desenvolvedor full stack / arquitetura",
+        "horas": 288,
+        "custo_hora": 60
+      },
+      {
+        "papel": "Desenvolvedor backend / DevOps",
+        "horas": 288,
+        "custo_hora": 55
+      },
+      {
+        "papel": "Desenvolvedor frontend / testes",
+        "horas": 288,
+        "custo_hora": 50
+      }
+    ],
+    "encargos": 0.0,
+    "custos_indiretos": {
+      "total_periodo": 1400,
+      "horas_totais_base_rateio": 864,
+      "descricao": "Ferramentas majoritariamente gratuitas (GitHub, VM Oracle Always Free, IDEs). Inclui cerca de R$ 1.320 de assinatura paga de IA (Claude) no período e domínio. Rateado pelas horas do projeto."
+    },
+    "outros_investimentos": {
+      "Lançamento e adequação jurídica (LGPD, termos de uso, marca)": 4000
+    },
+    "usar_custo_real_do_gva": true,
+    "nota": "Horas de 12 h/semana por pessoa (3 pessoas × 24 semanas). Custo/hora de mercado de nível júnior/pleno, que valora o esforço mesmo sem desembolso. Com usar_custo_real_do_gva = true, a mão de obra direta do investimento é o custo real (CR) das sprints."
+  },
+  "gva_sprints": {
+    "nota": "Valores de EXEMPLO em R$ por sprint, coerentes com 3 pessoas e muitas horas de teste manual (retrabalho no início eleva o custo real). Substitua pelos registros do quadro, se houver. planejado = valor planejado (VP/PV); agregado = valor agregado (VA/EV, escopo realmente entregue valorizado ao custo orçado); real = custo real (CR/AC).",
+    "bac": 47520,
+    "sprints": [
+      {
+        "sprint": 1,
+        "planejado": 3960,
+        "agregado": 2600,
+        "real": 3300
+      },
+      {
+        "sprint": 2,
+        "planejado": 3960,
+        "agregado": 3500,
+        "real": 4000
+      },
+      {
+        "sprint": 3,
+        "planejado": 3960,
+        "agregado": 3900,
+        "real": 4200
+      },
+      {
+        "sprint": 4,
+        "planejado": 3960,
+        "agregado": 4100,
+        "real": 4300
+      },
+      {
+        "sprint": 5,
+        "planejado": 3960,
+        "agregado": 4200,
+        "real": 4400
+      },
+      {
+        "sprint": 6,
+        "planejado": 3960,
+        "agregado": 4300,
+        "real": 4500
+      },
+      {
+        "sprint": 7,
+        "planejado": 3960,
+        "agregado": 4300,
+        "real": 4400
+      },
+      {
+        "sprint": 8,
+        "planejado": 3960,
+        "agregado": 4000,
+        "real": 4300
+      },
+      {
+        "sprint": 9,
+        "planejado": 3960,
+        "agregado": 4100,
+        "real": 4300
+      },
+      {
+        "sprint": 10,
+        "planejado": 3960,
+        "agregado": 4300,
+        "real": 4400
+      },
+      {
+        "sprint": 11,
+        "planejado": 3960,
+        "agregado": 4200,
+        "real": 4300
+      },
+      {
+        "sprint": 12,
+        "planejado": 3960,
+        "agregado": 4020,
+        "real": 4000
+      }
+    ]
+  },
+  "modelo": {
+    "horizonte_anos": 5,
+    "tma": 0.16,
+    "tma_justificativa": "Premissa acadêmica: taxa básica de juros de referência + prêmio de risco de produto digital em estágio inicial (cerca de 16 % a.a.). Atualizar com a taxa vigente.",
+    "ajustes": {
+      "fator_clientes": 1.0,
+      "fator_preco": 1.0,
+      "fator_custos": 1.0,
+      "fator_capex": 1.0
+    },
+    "investimento": {
+      "itens": {},
+      "vida_util_anos": 5,
+      "valor_residual": 0
+    },
+    "receita": {
+      "preco_mensal": 179,
+      "reajuste_anual": 0.05,
+      "clientes_fim_ano": [
+        5,
+        18,
+        40,
+        70,
+        100
+      ],
+      "churn_mensal": 0.03
+    },
+    "custos": {
+      "variavel_pct_receita": 0.03,
+      "variavel_por_cliente_mes": 8,
+      "fixos_anuais": {
+        "hospedagem_e_dados": [
+          1800,
+          3600,
+          6000,
+          9600,
+          13200
+        ],
+        "suporte_e_sucesso_do_cliente": [
+          0,
+          6000,
+          12000,
+          21000,
+          30000
+        ],
+        "manutencao_evolutiva_120h": [
+          6600,
+          9900,
+          13200,
+          13200,
+          13200
+        ],
+        "marketing_fixo": [
+          3000,
+          6000,
+          9000,
+          12000,
+          15000
+        ],
+        "contabilidade_e_juridico": 3600
+      },
+      "cac": 350
+    },
+    "tributos": {
+      "sobre_receita": 0.06,
+      "ir_csll": 0.0,
+      "limite_compensacao_prejuizo": 0.3,
+      "nota": "Caso-base: Simples Nacional (alíquota efetiva ~6 % sobre a receita, já inclui IRPJ/CSLL). O cenário lucro_real usa PIS/COFINS/ISS e 34 % de IRPJ/CSLL sobre o lucro, para mostrar o efeito da depreciação."
+    },
+    "cenarios": {
+      "pessimista": {
+        "ajustes": {
+          "fator_clientes": 0.7,
+          "fator_preco": 0.9,
+          "fator_custos": 1.1,
+          "fator_capex": 1.15
+        }
+      },
+      "otimista": {
+        "ajustes": {
+          "fator_clientes": 1.3,
+          "fator_preco": 1.1,
+          "fator_custos": 0.95,
+          "fator_capex": 0.95
+        }
+      },
+      "lucro_real": {
+        "tributos": {
+          "sobre_receita": 0.0865,
+          "ir_csll": 0.34
+        }
+      },
+      "horizonte_7_anos": {
+        "horizonte_anos": 7,
+        "investimento": {
+          "vida_util_anos": 5
+        }
+      }
+    }
+  },
+  "valor_percebido": {
+    "horas_retrabalho_por_mes_organizacao": 40,
+    "custo_hora": 60,
+    "reducao_esperada": 0.15,
+    "margem_alvo_para_preco_minimo": 0.2
+  },
+  "alternativas_infraestrutura": {
+    "descricao": "Decisão de hospedagem em produção (aulas 1, 2, 10 e 11): comparadas por CAUE em 5 anos, com a TMA do modelo.",
+    "alternativas": [
+      {
+        "nome": "VM Oracle Cloud Always Free (atual)",
+        "investimento": 1500,
+        "custo_anual": 3600,
+        "vida": 5,
+        "observacao": "Custo quase zero, mas sem SLA contratual e com limite de recursos; exige 60 h/ano de administração."
+      },
+      {
+        "nome": "Nuvem gerenciada (containers + banco gerenciado)",
+        "investimento": 6000,
+        "custo_anual": [
+          12000,
+          16000,
+          21000,
+          26000,
+          31000
+        ],
+        "vida": 5,
+        "observacao": "Escala e SLA, custo cresce com o uso."
+      },
+      {
+        "nome": "Servidor on-premises",
+        "investimento": 35000,
+        "custo_anual": 12000,
+        "vida": 5,
+        "valor_residual": 5000,
+        "observacao": "CapEx alto, energia, link e administração; valor residual do hardware."
+      }
+    ]
+  },
+  "backlog_roadmap": [
+    {
+      "nome": "Cobrança e planos (billing)",
+      "valor": 9,
+      "esforco": 8,
+      "valor_negocio": 9,
+      "criticidade_tempo": 8,
+      "reducao_risco": 3,
+      "tamanho": 8
+    },
+    {
+      "nome": "SSO corporativo (OIDC/SAML via Keycloak)",
+      "valor": 7,
+      "esforco": 5,
+      "valor_negocio": 7,
+      "criticidade_tempo": 5,
+      "reducao_risco": 4,
+      "tamanho": 5
+    },
+    {
+      "nome": "Integração Jira/GitHub Issues",
+      "valor": 8,
+      "esforco": 13,
+      "valor_negocio": 8,
+      "criticidade_tempo": 4,
+      "reducao_risco": 2,
+      "tamanho": 13
+    },
+    {
+      "nome": "Notificações por e-mail e alertas",
+      "valor": 6,
+      "esforco": 3,
+      "valor_negocio": 6,
+      "criticidade_tempo": 5,
+      "reducao_risco": 2,
+      "tamanho": 3
+    },
+    {
+      "nome": "Relatório executivo em PDF",
+      "valor": 5,
+      "esforco": 3,
+      "valor_negocio": 5,
+      "criticidade_tempo": 3,
+      "reducao_risco": 1,
+      "tamanho": 3
+    },
+    {
+      "nome": "Aplicativo móvel (PWA)",
+      "valor": 4,
+      "esforco": 13,
+      "valor_negocio": 4,
+      "criticidade_tempo": 2,
+      "reducao_risco": 1,
+      "tamanho": 13
+    },
+    {
+      "nome": "Templates de projeto (onboarding)",
+      "valor": 6,
+      "esforco": 3,
+      "valor_negocio": 6,
+      "criticidade_tempo": 6,
+      "reducao_risco": 2,
+      "tamanho": 3
+    },
+    {
+      "nome": "API pública e webhooks",
+      "valor": 5,
+      "esforco": 8,
+      "valor_negocio": 5,
+      "criticidade_tempo": 3,
+      "reducao_risco": 2,
+      "tamanho": 8
+    },
+    {
+      "nome": "Sugestão de requisitos com IA",
+      "valor": 7,
+      "esforco": 13,
+      "valor_negocio": 7,
+      "criticidade_tempo": 3,
+      "reducao_risco": 3,
+      "tamanho": 13
+    },
+    {
+      "nome": "Backup/DR e monitoramento",
+      "valor": 5,
+      "esforco": 5,
+      "valor_negocio": 5,
+      "criticidade_tempo": 4,
+      "reducao_risco": 9,
+      "tamanho": 5
+    }
+  ],
+  "qualidade_bom_o_suficiente": {
+    "descricao": "Níveis acumulados de investimento em qualidade de testes (custo) versus perdas evitadas por incidentes e retrabalho (benefício), em R$ ao longo do horizonte.",
+    "niveis": [
+      {
+        "nome": "Testes unitários das regras de negócio",
+        "custo": 5000,
+        "beneficio": 18000
+      },
+      {
+        "nome": "+ testes de API/integração ponta a ponta",
+        "custo": 9000,
+        "beneficio": 30000
+      },
+      {
+        "nome": "+ testes de interface automatizados (Playwright)",
+        "custo": 15000,
+        "beneficio": 36000
+      },
+      {
+        "nome": "+ mutação, carga e cobertura próxima de 100 %",
+        "custo": 30000,
+        "beneficio": 40000
+      }
+    ]
+  },
+  "hipoteses_e_riscos": [
+    "Trabalho acadêmico: nenhum número de mercado (preço, clientes, churn, CAC, suporte) foi validado com clientes pagantes; são premissas de exemplo.",
+    "O custo/hora é de mercado (valoração do esforço), não um desembolso: a equipe de 3 estudantes não foi remunerada.",
+    "A maior parte das horas foi de testes manuais; isso aumenta o custo real (IDC < 1) e é um ponto de melhoria (automatizar) discutido em 'bom o suficiente'.",
+    "Os dados de GVA por sprint são ilustrativos; as sprints foram planejadas com o orientador e podem ser substituídas pelos registros reais.",
+    "A hospedagem gratuita não tem SLA; vender como SaaS exige migrar ou contratar suporte.",
+    "A conta-base considera Simples Nacional; o enquadramento tributário real depende de contador.",
+    "Fluxos em valores correntes e TMA nominal; sem inflação além do reajuste anual do preço."
+  ]
+}
