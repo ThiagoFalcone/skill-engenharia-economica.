@@ -85,6 +85,48 @@ class TestCopiaClaude(unittest.TestCase):
         self.assertEqual(arquivos(SKILL), arquivos(copia))
 
 
+class TestHistoricoGit(unittest.TestCase):
+    def test_git_hours(self):
+        import datetime as dt
+        import historico_git as hg
+        t0 = dt.datetime(2026, 1, 1, 10, 0, tzinfo=dt.timezone.utc)
+        # dois commits com 30 min: bônus de 2 h + 0,5 h
+        self.assertAlmostEqual(hg.horas_git([t0, t0 + dt.timedelta(minutes=30)], 120, 120), 2.5)
+        # dois commits distantes mais de 2 h: duas sessões, 2 h cada
+        self.assertAlmostEqual(hg.horas_git([t0, t0 + dt.timedelta(hours=5)], 120, 120), 4.0)
+        self.assertEqual(hg.horas_git([], 120, 120), 0.0)
+
+    def test_snapshot_do_tcc_offline(self):
+        saida = os.path.join(tempfile.gettempdir(), "historico-teste.json")
+        r = subprocess.run([sys.executable, os.path.join(SCRIPTS, "historico_git.py"), "--cache",
+                            os.path.join(RAIZ, "examples", "dados"), "--saida", saida],
+                           capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        with open(saida, encoding="utf-8") as fh:
+            h = json.load(fh)
+        os.unlink(saida)
+        self.assertEqual(h["commits"], 132)
+        self.assertAlmostEqual(h["horas_medidas"], 103.5, places=1)
+        self.assertAlmostEqual(h["horas_estimadas"], h["horas_medidas"] / 0.20, places=1)
+        self.assertEqual(len(h["janelas"]), 17)
+        self.assertAlmostEqual(sum(j["peso_entregue"] for j in h["janelas"]), 1.0, places=2)
+        bac = h["gva_sprints"]["bac"]
+        self.assertAlmostEqual(sum(x["planejado"] for x in h["gva_sprints"]["sprints"]), bac, delta=1.0)
+        self.assertAlmostEqual(sum(x["agregado"] for x in h["gva_sprints"]["sprints"]), bac, delta=1.0)
+
+    def test_cobertura_invalida(self):
+        r = subprocess.run([sys.executable, os.path.join(SCRIPTS, "historico_git.py"), "--cache",
+                            os.path.join(RAIZ, "examples", "dados"), "--saida", os.devnull, "--cobertura", "0"],
+                           capture_output=True, text=True, encoding="utf-8")
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_relatorio_mostra_evidencias_e_fontes(self):
+        with open(os.path.join(RAIZ, "examples", "tcc-input.json"), encoding="utf-8") as fh:
+            texto = gerar_relatorio.gerar(json.load(fh))
+        for trecho in ("### 3.0 Evidência real", "git-hours", "## 15. Fontes e evidências", "Selic", "Robert Half"):
+            self.assertIn(trecho, texto)
+
+
 class TestCLI(unittest.TestCase):
     def rodar(self, *args):
         r = subprocess.run([sys.executable, os.path.join(SCRIPTS, "econ_cli.py"), *args],

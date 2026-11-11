@@ -1,0 +1,302 @@
+[
+ {
+  "n": 30,
+  "autor": "GubioGarcia",
+  "titulo": "Release: develop → main",
+  "ramo": "develop",
+  "criado": "2026-11-02T20:19:30Z",
+  "merge": "2026-11-02T20:21:49Z",
+  "adicoes": 10589,
+  "remocoes": 6543
+ },
+ {
+  "n": 29,
+  "autor": "GubioGarcia",
+  "titulo": "Pesquisa: marcação de uso prévio no \"antes\" e READMEs como produto",
+  "ramo": "feature/pesquisa-uso-previo",
+  "criado": "2026-11-02T19:57:27Z",
+  "merge": "2026-11-02T20:03:36Z",
+  "adicoes": 413,
+  "remocoes": 85
+ },
+ {
+  "n": 28,
+  "autor": "GubioGarcia",
+  "titulo": "Corrige o link Área administrativa da landing depois do logout",
+  "ramo": "fix/area-admin-apos-logout",
+  "criado": "2026-11-02T02:26:36Z",
+  "merge": "2026-11-02T02:30:44Z",
+  "adicoes": 22,
+  "remocoes": 4
+ },
+ {
+  "n": 27,
+  "autor": "GubioGarcia",
+  "titulo": "Pesquisa do TCC: questionário antes/depois, painel do admin e admin exclusivo",
+  "ramo": "feature/pesquisa-fase5",
+  "criado": "2026-11-02T01:39:49Z",
+  "merge": "2026-11-02T01:44:09Z",
+  "adicoes": 3565,
+  "remocoes": 130
+ },
+ {
+  "n": 26,
+  "autor": "GubioGarcia",
+  "titulo": "Fase 2: área administrativa",
+  "ramo": "feature/admin",
+  "criado": "2026-11-01T21:27:04Z",
+  "merge": "2026-11-01T21:32:00Z",
+  "adicoes": 1959,
+  "remocoes": 336
+ },
+ {
+  "n": 25,
+  "autor": "GubioGarcia",
+  "titulo": "Fase 1: landing page pública e página de privacidade",
+  "ramo": "feature/landing",
+  "criado": "2026-11-01T21:27:02Z",
+  "merge": "2026-11-01T21:31:14Z",
+  "adicoes": 887,
+  "remocoes": 91
+ },
+ {
+  "n": 24,
+  "autor": "GubioGarcia",
+  "titulo": "Fase 0: endurecimento de segurança, Flyway e contas separadas da demo",
+  "ramo": "feature/fase0-seguranca",
+  "criado": "2026-11-01T21:27:01Z",
+  "merge": "2026-11-01T21:30:52Z",
+  "adicoes": 1101,
+  "remocoes": 415
+ },
+ {
+  "n": 23,
+  "autor": "GubioGarcia",
+  "titulo": "Ajustes: tela Meu Perfil e contadores de Visão geral, Analytics e Stakeholders",
+  "ramo": "fix/ajustes",
+  "criado": "2026-10-22T23:39:42Z",
+  "merge": "2026-10-22T23:41:04Z",
+  "adicoes": 559,
+  "remocoes": 116
+ },
+ {
+  "n": 22,
+  "autor": "GubioGarcia",
+  "titulo": "Fix/ajustes",
+  "ramo": "fix/ajustes",
+  "criado": "2026-10-21T00:02:48Z",
+  "merge": "2026-10-21T00:02:58Z",
+  "adicoes": 226,
+  "remocoes": 28
+ },
+ {
+  "n": 21,
+  "autor": "GubioGarcia",
+  "titulo": "Fix/ajustes telas",
+  "ramo": "fix/ajustes_telas",
+  "criado": "2026-10-20T23:00:05Z",
+  "merge": "2026-10-20T23:00:17Z",
+  "adicoes": 344,
+  "remocoes": 65
+ },
+ {
+  "n": 20,
+  "autor": "ThiagoFalcone",
+  "titulo": "Unifica exception handlers e testa 401/403 via HTTP",
+  "ramo": "fix/exception-handlers",
+  "criado": "2026-10-19T13:44:14Z",
+  "merge": "2026-10-20T23:09:34Z",
+  "adicoes": 79,
+  "remocoes": 102
+ },
+ {
+  "n": 19,
+  "autor": "ThiagoFalcone",
+  "titulo": "Elimina N+1 por fetch EAGER implícito",
+  "ramo": "fix/n-plus-1-lazy",
+  "criado": "2026-10-19T13:40:18Z",
+  "merge": "2026-10-20T23:15:28Z",
+  "adicoes": 87,
+  "remocoes": 26
+ },
+ {
+  "n": 18,
+  "autor": "ThiagoFalcone",
+  "titulo": "CI no GitHub Actions e health check via Actuator",
+  "ramo": "feature/ci-actuator",
+  "criado": "2026-10-19T13:26:59Z",
+  "merge": "2026-10-20T23:08:59Z",
+  "adicoes": 53,
+  "remocoes": 0
+ },
+ {
+  "n": 17,
+  "autor": "GubioGarcia",
+  "titulo": "Fix/ajustes telas",
+  "ramo": "fix/ajustes_telas",
+  "criado": "2026-10-14T01:49:29Z",
+  "merge": "2026-10-14T01:49:43Z",
+  "adicoes": 601,
+  "remocoes": 691
+ },
+ {
+  "n": 16,
+  "autor": "GubioGarcia",
+  "titulo": "Merge da primeira versão completa do software para hospedagem em nuvem",
+  "ramo": "develop",
+  "criado": "2026-10-12T18:42:09Z",
+  "merge": "2026-10-12T18:42:22Z",
+  "adicoes": 25629,
+  "remocoes": 2887
+ },
+ {
+  "n": 15,
+  "autor": "GubioGarcia",
+  "titulo": "Feature/controle autorizacao",
+  "ramo": "feature/controle_autorizacao",
+  "criado": "2026-10-11T13:15:58Z",
+  "merge": "2026-10-11T13:16:14Z",
+  "adicoes": 11703,
+  "remocoes": 2851
+ },
+ {
+  "n": 14,
+  "autor": "GubioGarcia",
+  "titulo": "fix: corrige ajustes de front nas telas de rastreabilidade e modelagem de dados",
+  "ramo": "fix/rastreabilidade_e_modelagem_dados",
+  "criado": "2026-09-27T15:32:59Z",
+  "merge": "2026-09-27T15:33:20Z",
+  "adicoes": 195,
+  "remocoes": 65
+ },
+ {
+  "n": 13,
+  "autor": "GubioGarcia",
+  "titulo": "Corrige erros do front e implementa um melhor preenchimento das chave…",
+  "ramo": "fix/rastreabilidade_e_modelagem_dados",
+  "criado": "2026-09-18T23:51:21Z",
+  "merge": "2026-09-18T23:51:47Z",
+  "adicoes": 1996,
+  "remocoes": 227
+ },
+ {
+  "n": 12,
+  "autor": "GubioGarcia",
+  "titulo": "Feature/telas rastreabilidade e modelagem",
+  "ramo": "feature/telas_rastreabilidade_e_modelagem",
+  "criado": "2026-09-07T18:33:05Z",
+  "merge": "2026-09-07T18:34:40Z",
+  "adicoes": 4283,
+  "remocoes": 631
+ },
+ {
+  "n": 11,
+  "autor": "ThiagoFalcone",
+  "titulo": "docs: documenta os módulos novos e adiciona modo de demonstração",
+  "ramo": "feature/telas_rastreabilidade_e_modelagem",
+  "criado": "2026-09-03T16:55:33Z",
+  "merge": "2026-09-03T16:55:45Z",
+  "adicoes": 1187,
+  "remocoes": 1
+ },
+ {
+  "n": 10,
+  "autor": "ThiagoFalcone",
+  "titulo": "feat: adiciona telas de rastreabilidade e modelagem de dados no protó…",
+  "ramo": "feature/telas_rastreabilidade_e_modelagem",
+  "criado": "2026-08-30T18:01:33Z",
+  "merge": "2026-08-30T18:01:55Z",
+  "adicoes": 5552,
+  "remocoes": 2
+ },
+ {
+  "n": 9,
+  "autor": "GubioGarcia",
+  "titulo": "feat: insere entities e repositories para módulos datamodel e traceab…",
+  "ramo": "feature/criacao_entidades_rastreabilidade_e_modelagem",
+  "criado": "2026-08-27T22:42:15Z",
+  "merge": "2026-08-27T22:43:10Z",
+  "adicoes": 382,
+  "remocoes": 0
+ },
+ {
+  "n": 8,
+  "autor": "GubioGarcia",
+  "titulo": "test: adiciona testes de integração dos services de organização, proj…",
+  "ramo": "feature/testes_unitarios",
+  "criado": "2026-08-27T22:39:59Z",
+  "merge": "2026-08-27T22:41:33Z",
+  "adicoes": 1200,
+  "remocoes": 0
+ },
+ {
+  "n": 7,
+  "autor": "GubioGarcia",
+  "titulo": "Feat: correção seed campos Propriedade",
+  "ramo": "feat/correcao_data.sql",
+  "criado": "2026-06-06T20:23:07Z",
+  "merge": null,
+  "adicoes": 6,
+  "remocoes": 6
+ },
+ {
+  "n": 6,
+  "autor": "GubioGarcia",
+  "titulo": "Merge da Main com a versão MVP",
+  "ramo": "fix/migrations",
+  "criado": "2026-06-06T19:28:48Z",
+  "merge": "2026-06-06T19:29:07Z",
+  "adicoes": 28317,
+  "remocoes": 46
+ },
+ {
+  "n": 5,
+  "autor": "GubioGarcia",
+  "titulo": "Feature/implementacao requisitos",
+  "ramo": "feature/implementacao_requisitos",
+  "criado": "2026-05-07T21:00:19Z",
+  "merge": "2026-05-07T21:00:32Z",
+  "adicoes": 5527,
+  "remocoes": 1854
+ },
+ {
+  "n": 4,
+  "autor": "GubioGarcia",
+  "titulo": "feat(project): implementacao inicial",
+  "ramo": "feature/implementacao_project",
+  "criado": "2026-04-14T02:02:03Z",
+  "merge": "2026-04-14T02:02:12Z",
+  "adicoes": 593,
+  "remocoes": 0
+ },
+ {
+  "n": 3,
+  "autor": "GubioGarcia",
+  "titulo": "feat(organization): implementacao inicial",
+  "ramo": "feature/implementacao_organization",
+  "criado": "2026-04-14T02:01:25Z",
+  "merge": "2026-04-14T02:01:38Z",
+  "adicoes": 312,
+  "remocoes": 0
+ },
+ {
+  "n": 2,
+  "autor": "GubioGarcia",
+  "titulo": "fix: correção erros no frontend e adição do frontend no container",
+  "ramo": "feature/setup-front-auth",
+  "criado": "2026-04-09T00:12:25Z",
+  "merge": "2026-04-09T00:12:41Z",
+  "adicoes": 1029,
+  "remocoes": 760
+ },
+ {
+  "n": 1,
+  "autor": "GubioGarcia",
+  "titulo": "feat: setup inicial da infraestrutura com docker e keycloak",
+  "ramo": "feature/setup-infra-auth",
+  "criado": "2026-03-26T01:02:01Z",
+  "merge": "2026-03-26T01:03:15Z",
+  "adicoes": 1959,
+  "remocoes": 0
+ }
+]

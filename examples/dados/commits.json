@@ -1,0 +1,794 @@
+[
+ {
+  "sha": "8152b13",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T20:21:48Z",
+  "msg": "Release: develop → main (#30)"
+ },
+ {
+  "sha": "361517c",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T20:03:36Z",
+  "msg": "Pesquisa: marcação de uso prévio no \"antes\" e READMEs como produto (#29)"
+ },
+ {
+  "sha": "f016deb",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T19:57:04Z",
+  "msg": "READMEs: descreve a plataforma como produto"
+ },
+ {
+  "sha": "f047a88",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T19:22:00Z",
+  "msg": "Pesquisa: marcação de uso prévio no \"antes\""
+ },
+ {
+  "sha": "4970eff",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T02:30:44Z",
+  "msg": "Corrige o link Área administrativa da landing depois do logout (#28)"
+ },
+ {
+  "sha": "f81637b",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T02:26:21Z",
+  "msg": "Corrige o link \"Área administrativa\" da landing depois do logout"
+ },
+ {
+  "sha": "e498d27",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T01:44:09Z",
+  "msg": "Pesquisa do TCC: questionário antes/depois, painel do admin e admin exclusivo (#27)"
+ },
+ {
+  "sha": "ae6f07b",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T01:34:15Z",
+  "msg": "Pesquisa Fase 5: testes ponta a ponta da pesquisa"
+ },
+ {
+  "sha": "e6dbcf4",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T01:25:41Z",
+  "msg": "Pesquisa: público Dono/Gestor, \"Responder depois\" e admin exclusivo"
+ },
+ {
+  "sha": "47a5228",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T01:07:34Z",
+  "msg": "Pesquisa Fase 4: painel do admin"
+ },
+ {
+  "sha": "1608708",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T00:28:09Z",
+  "msg": "Pesquisa Fase 3: frontend do participante"
+ },
+ {
+  "sha": "67c1932",
+  "autor": "GubioGarcia",
+  "data": "2026-11-02T00:03:46Z",
+  "msg": "Pesquisa Fase 2: API do participante"
+ },
+ {
+  "sha": "ba16940",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T23:47:36Z",
+  "msg": "Pesquisa Fase 1: modelo de dados e instrumento v1"
+ },
+ {
+  "sha": "b205480",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T23:37:13Z",
+  "msg": "Pesquisa Fase 0: CSV anti-fórmula, limite nos envios e privacidade"
+ },
+ {
+  "sha": "aa1d25a",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T21:32:00Z",
+  "msg": "Fase 2: área administrativa (#26)"
+ },
+ {
+  "sha": "cdd99b1",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T21:31:14Z",
+  "msg": "Fase 1: landing page pública e página de privacidade (#25)"
+ },
+ {
+  "sha": "c3957f8",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T21:30:51Z",
+  "msg": "Fase 0: endurecimento de segurança, Flyway e contas separadas da demo (#24)"
+ },
+ {
+  "sha": "cd869e2",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T21:16:39Z",
+  "msg": "Fase 2: área administrativa"
+ },
+ {
+  "sha": "d52494b",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T20:52:51Z",
+  "msg": "Fase 1: landing page pública e página de privacidade"
+ },
+ {
+  "sha": "5b1c386",
+  "autor": "GubioGarcia",
+  "data": "2026-11-01T20:36:05Z",
+  "msg": "Fase 0: endurecimento de segurança, Flyway e contas separadas da demo"
+ },
+ {
+  "sha": "89e85a9",
+  "autor": "GubioGarcia",
+  "data": "2026-10-22T23:41:04Z",
+  "msg": "Ajustes: tela Meu Perfil e contadores de Visão geral, Analytics e Stakeholders (#23)"
+ },
+ {
+  "sha": "42ae9b3",
+  "autor": "GubioGarcia",
+  "data": "2026-10-22T23:35:43Z",
+  "msg": "Contadores de Visão geral, Analytics e Stakeholders"
+ },
+ {
+  "sha": "328f12e",
+  "autor": "GubioGarcia",
+  "data": "2026-10-22T23:35:43Z",
+  "msg": "Corrige o histórico de interações na inicialização"
+ },
+ {
+  "sha": "4ad21d6",
+  "autor": "GubioGarcia",
+  "data": "2026-10-22T23:35:42Z",
+  "msg": "Registra todas as ações nas interações do projeto"
+ },
+ {
+  "sha": "398e867",
+  "autor": "GubioGarcia",
+  "data": "2026-10-22T22:58:11Z",
+  "msg": "Tela Meu Perfil: botão Voltar e card do perfil responsivo"
+ },
+ {
+  "sha": "0fbf86c",
+  "autor": "GubioGarcia",
+  "data": "2026-10-21T00:02:58Z",
+  "msg": "Fix/ajustes (#22)"
+ },
+ {
+  "sha": "d631cdf",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:58:33Z",
+  "msg": "Tela de arquivos em cartões no celular"
+ },
+ {
+  "sha": "6b84936",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:42:31Z",
+  "msg": "e2e das leituras que dependem de relações LAZY"
+ },
+ {
+  "sha": "659ac3c",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:15:27Z",
+  "msg": "Elimina N+1 por fetch EAGER implícito (#19)"
+ },
+ {
+  "sha": "605dbe1",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:09:34Z",
+  "msg": "Unifica exception handlers e testa 401/403 via HTTP (#20)"
+ },
+ {
+  "sha": "e990225",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:08:58Z",
+  "msg": "CI no GitHub Actions e health check via Actuator (#18)"
+ },
+ {
+  "sha": "65b8d69",
+  "autor": "GubioGarcia",
+  "data": "2026-10-20T23:00:17Z",
+  "msg": "Fix/ajustes telas (#21)"
+ },
+ {
+  "sha": "d74e28d",
+  "autor": "ThiagoFalcone",
+  "data": "2026-10-19T14:18:54Z",
+  "msg": "CI: chama o mvnw via sh (arquivo sem permissão de execução no Git)"
+ },
+ {
+  "sha": "8a46cc6",
+  "autor": "ThiagoFalcone",
+  "data": "2026-10-19T13:44:09Z",
+  "msg": "Unifica os exception handlers e testa 401/403 via MockMvc"
+ },
+ {
+  "sha": "7e79f5c",
+  "autor": "ThiagoFalcone",
+  "data": "2026-10-19T13:40:11Z",
+  "msg": "Elimina N+1 por fetch EAGER implícito nas entidades"
+ },
+ {
+  "sha": "a11634b",
+  "autor": "ThiagoFalcone",
+  "data": "2026-10-19T13:24:43Z",
+  "msg": "CI no GitHub Actions e health check via Actuator"
+ },
+ {
+  "sha": "27bd686",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T23:12:03Z",
+  "msg": "Login com botão próprio de mostrar senha, sempre visível"
+ },
+ {
+  "sha": "82ddfa3",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T23:12:02Z",
+  "msg": "Diagrama ER: zoom ajustado, rolagem completa e foco sem cortar a entidade"
+ },
+ {
+  "sha": "cd4eb3a",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T01:49:43Z",
+  "msg": "Fix/ajustes telas (#17)"
+ },
+ {
+  "sha": "1f9fb09",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T01:35:56Z",
+  "msg": "e2e de responsividade no celular"
+ },
+ {
+  "sha": "ac26c6f",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T01:35:56Z",
+  "msg": "Telas responsivas para celular, tablet e notebook"
+ },
+ {
+  "sha": "dfa0a9b",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T01:35:56Z",
+  "msg": "Base responsiva: menu do projeto em gaveta, alturas dvh e padrões de layout"
+ },
+ {
+  "sha": "8516b3e",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T00:41:11Z",
+  "msg": "Remove papéis e votação legados do frontend"
+ },
+ {
+  "sha": "b0ff854",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T00:41:11Z",
+  "msg": "Telas usam as permissões reais do /me em vez de isStakeholder"
+ },
+ {
+  "sha": "ddf20c2",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T00:24:39Z",
+  "msg": "Tela de usuários enxuta: lista, onde cada pessoa atua e exclusão"
+ },
+ {
+  "sha": "2e3d8df",
+  "autor": "GubioGarcia",
+  "data": "2026-10-14T00:24:39Z",
+  "msg": "GET /api/usuario/{id}/acessos: papéis reais de uma pessoa"
+ },
+ {
+  "sha": "740ce76",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:53:43Z",
+  "msg": "Remove o modo de demonstração /demo/ do frontend"
+ },
+ {
+  "sha": "d0aaa0e",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:53:43Z",
+  "msg": "Frontend sem erros de lint"
+ },
+ {
+  "sha": "486357f",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:53:43Z",
+  "msg": "Remove o parâmetro requisitoIds sem uso dos serviços de modelagem e rastreabilidade"
+ },
+ {
+  "sha": "e065dff",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:53:42Z",
+  "msg": "Snackbar: notify com identidade estável"
+ },
+ {
+  "sha": "eea278e",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:37:52Z",
+  "msg": "Remove as variáveis de build VITE_KEYCLOAK_* do ambiente local"
+ },
+ {
+  "sha": "2a7ba42",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:37:52Z",
+  "msg": "Remove keycloak-js, @react-keycloak/web e os mocks do frontend"
+ },
+ {
+  "sha": "b4428fc",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:31:25Z",
+  "msg": "Timeout maior na busca das chaves JWKS do Keycloak"
+ },
+ {
+  "sha": "a529fce",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:31:19Z",
+  "msg": "Ambiente hospedado na VM Oracle (infrastructure/deploy)"
+ },
+ {
+  "sha": "bf4aaf0",
+  "autor": "GubioGarcia",
+  "data": "2026-10-13T23:31:12Z",
+  "msg": "Contas da demo com e-mails fictícios e senha por pessoa"
+ },
+ {
+  "sha": "83726fd",
+  "autor": "GubioGarcia",
+  "data": "2026-10-12T18:42:22Z",
+  "msg": "Merge da primeira versão completa do software para hospedagem em nuvem (#16)"
+ },
+ {
+  "sha": "d05cd33",
+  "autor": "GubioGarcia",
+  "data": "2026-10-12T18:40:37Z",
+  "msg": "READMEs atualizados: tela da organização, MUI X/Mermaid e armazenamento de arquivos"
+ },
+ {
+  "sha": "9c710d9",
+  "autor": "GubioGarcia",
+  "data": "2026-10-11T13:16:14Z",
+  "msg": "Feature/controle autorizacao (#15)"
+ },
+ {
+  "sha": "dca7440",
+  "autor": "GubioGarcia",
+  "data": "2026-09-30T00:39:06Z",
+  "msg": "Tela da organização unificada com a lista de projetos"
+ },
+ {
+  "sha": "980e2c3",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T22:31:48Z",
+  "msg": "READMEs atualizados com o controle de acesso, dados de demonstração e testes"
+ },
+ {
+  "sha": "6faf867",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T22:14:51Z",
+  "msg": "Scripts de banco (V1–V3) alinhados ao schema atual"
+ },
+ {
+  "sha": "8509747",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T22:06:24Z",
+  "msg": "Testes da interface com Playwright e correções encontradas por eles"
+ },
+ {
+  "sha": "344a929",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T21:43:08Z",
+  "msg": "Frontend da autorização: membros da organização, pendências reais e proteção de rotas"
+ },
+ {
+  "sha": "2d008bf",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T21:26:13Z",
+  "msg": "Seed do projeto do TCC no modelo de autorização e script para recriar o ambiente de dev"
+ },
+ {
+  "sha": "c05fb39",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T21:20:25Z",
+  "msg": "Testes da autorização: unitários das Fases 5 e 6 e e2e completo"
+ },
+ {
+  "sha": "ec1f059",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T21:03:52Z",
+  "msg": "Fase 6 da autorização: membros, convites, solicitações, aprovação e exportação"
+ },
+ {
+  "sha": "96d8e95",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T19:06:25Z",
+  "msg": "Fase 5 da autorização: sessão com refresh token, revogação e /me"
+ },
+ {
+  "sha": "202250a",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T18:52:11Z",
+  "msg": "Fase 4 da autorização: permissões aplicadas em todos os endpoints"
+ },
+ {
+  "sha": "eb1fd36",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T18:24:42Z",
+  "msg": "Fase 3 da autorização: motor de autorização por grupos do Keycloak"
+ },
+ {
+  "sha": "285d962",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T18:12:34Z",
+  "msg": "Fase 2 da autorização: grupos de acesso de organizações e projetos no Keycloak"
+ },
+ {
+  "sha": "eff9163",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T17:51:30Z",
+  "msg": "Fase 1 da autorização: estrutura de roles, mapper de grupos e sync do realm"
+ },
+ {
+  "sha": "d8be111",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T17:51:29Z",
+  "msg": "Corrige conferência de senha no Keycloak e resposta 405 da API"
+ },
+ {
+  "sha": "eafb273",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T17:16:17Z",
+  "msg": "protege troca de senha e torna auditoria somente leitura"
+ },
+ {
+  "sha": "6f105e2",
+  "autor": "GubioGarcia",
+  "data": "2026-09-27T15:33:19Z",
+  "msg": "fix: corrige ajustes de front nas telas de rastreabilidade e modelagem de dados (#14)"
+ },
+ {
+  "sha": "bde8cd4",
+  "autor": "ThiagoFalcone",
+  "data": "2026-09-21T14:03:34Z",
+  "msg": "fix: corrige ajustes de front nas telas de rastreabilidade e modelagem de dados"
+ },
+ {
+  "sha": "2feca4c",
+  "autor": "GubioGarcia",
+  "data": "2026-09-18T23:51:47Z",
+  "msg": "Corrige erros do front e implementa um melhor preenchimento das chave… (#13)"
+ },
+ {
+  "sha": "b7a3444",
+  "autor": "GubioGarcia",
+  "data": "2026-09-18T23:42:38Z",
+  "msg": "Corrige erros do front e implementa um melhor preenchimento das chaves estrageiras para as entidades"
+ },
+ {
+  "sha": "df9407f",
+  "autor": "GubioGarcia",
+  "data": "2026-09-07T18:34:40Z",
+  "msg": "Feature/telas rastreabilidade e modelagem (#12)"
+ },
+ {
+  "sha": "e9c1fed",
+  "autor": "GubioGarcia",
+  "data": "2026-09-07T18:29:19Z",
+  "msg": "Integra telas rastreabilidade e modelagem de dados ao backend + ajustes na tela de detalhes do requi"
+ },
+ {
+  "sha": "d3cb15e",
+  "autor": "GubioGarcia",
+  "data": "2026-09-07T16:16:18Z",
+  "msg": "Merge remote-tracking branch 'origin/feature/implementa_Controllers_Services_Rastreabilidade_E_Model"
+ },
+ {
+  "sha": "184e0e7",
+  "autor": "ThiagoFalcone",
+  "data": "2026-09-03T16:55:45Z",
+  "msg": "docs: documenta os módulos novos e adiciona modo de demonstração (#11)"
+ },
+ {
+  "sha": "2442bb2",
+  "autor": "ThiagoFalcone",
+  "data": "2026-09-03T16:49:19Z",
+  "msg": "docs: documenta os módulos novos e adiciona modo de demonstração"
+ },
+ {
+  "sha": "fca6720",
+  "autor": "GubioGarcia",
+  "data": "2026-09-01T23:20:35Z",
+  "msg": "Implementa controllers e services da rastreabilidade e modelagem de entidades"
+ },
+ {
+  "sha": "2b80b79",
+  "autor": "ThiagoFalcone",
+  "data": "2026-08-30T18:01:55Z",
+  "msg": "feat: adiciona telas de rastreabilidade e modelagem de dados no protó… (#10)"
+ },
+ {
+  "sha": "ba34167",
+  "autor": "ThiagoFalcone",
+  "data": "2026-08-30T17:58:49Z",
+  "msg": "feat: adiciona telas de rastreabilidade e modelagem de dados no protótipo"
+ },
+ {
+  "sha": "616d32f",
+  "autor": "GubioGarcia",
+  "data": "2026-08-27T22:43:10Z",
+  "msg": "feat: insere entities e repositories para módulos datamodel e traceab… (#9)"
+ },
+ {
+  "sha": "1c05f80",
+  "autor": "GubioGarcia",
+  "data": "2026-08-27T22:41:33Z",
+  "msg": "test: adiciona testes de integração dos services de organização, proj… (#8)"
+ },
+ {
+  "sha": "d92fff2",
+  "autor": "GubioGarcia",
+  "data": "2026-08-18T23:37:38Z",
+  "msg": "feat: insere entities e repositories para módulos datamodel e traceability"
+ },
+ {
+  "sha": "5ede9d8",
+  "autor": "GubioGarcia",
+  "data": "2026-08-18T23:15:40Z",
+  "msg": "test: adiciona testes de integração dos services de organização, projeto, status e requisito"
+ },
+ {
+  "sha": "e06d932",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T20:28:46Z",
+  "msg": "chore: remove vídeo do repositório e adiciona referência no readme.md par ao vídeo hospedado"
+ },
+ {
+  "sha": "51a60e4",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T20:25:28Z",
+  "msg": "chore: resolve merge com origin/main"
+ },
+ {
+  "sha": "2c43890",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T20:17:34Z",
+  "msg": "chore: Atualização de dados documentais e estruturais do projeto"
+ },
+ {
+  "sha": "1f44320",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T20:10:59Z",
+  "msg": "Update Readme.md"
+ },
+ {
+  "sha": "8c18a39",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T20:05:11Z",
+  "msg": "chore: Atualização de dados documentais e estruturais do projeto"
+ },
+ {
+  "sha": "8a95190",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T19:29:07Z",
+  "msg": "Merge da Main com a versão MVP (#6)"
+ },
+ {
+  "sha": "089da0d",
+  "autor": "GubioGarcia",
+  "data": "2026-06-06T04:54:57Z",
+  "msg": "Alteração na inserção básica de dados e correção na quebra de linha dos campos textuais"
+ },
+ {
+  "sha": "98755bb",
+  "autor": "GubioGarcia",
+  "data": "2026-06-01T23:48:31Z",
+  "msg": "Alteração dos limites de string e exibição em tela"
+ },
+ {
+  "sha": "12d6aa4",
+  "autor": "GubioGarcia",
+  "data": "2026-06-01T22:28:55Z",
+  "msg": "implementação do armazenamento de arquivos do projeto"
+ },
+ {
+  "sha": "a3e5d1c",
+  "autor": "GubioGarcia",
+  "data": "2026-05-26T22:39:57Z",
+  "msg": "implementação da visão stakeholder com diferenças da visão gestor"
+ },
+ {
+  "sha": "a8e4e3c",
+  "autor": "GubioGarcia",
+  "data": "2026-05-25T23:19:50Z",
+  "msg": "Implementação da tela auditoria"
+ },
+ {
+  "sha": "dd26bbc",
+  "autor": "GubioGarcia",
+  "data": "2026-05-13T22:45:25Z",
+  "msg": "Implementação de comentários e alteração das telas"
+ },
+ {
+  "sha": "898775c",
+  "autor": "GubioGarcia",
+  "data": "2026-05-10T18:14:13Z",
+  "msg": "feat: correção e ajustes de erros visuais"
+ },
+ {
+  "sha": "79250d2",
+  "autor": "GubioGarcia",
+  "data": "2026-05-07T20:58:38Z",
+  "msg": "Implementação de gestão e telas de requisitos"
+ },
+ {
+  "sha": "efd2f74",
+  "autor": "GubioGarcia",
+  "data": "2026-05-03T23:39:38Z",
+  "msg": "Implantação das novas telas de visão do produto e integração com o backend"
+ },
+ {
+  "sha": "1b670fa",
+  "autor": "GubioGarcia",
+  "data": "2026-05-02T22:56:57Z",
+  "msg": "Implementação de status de requisitos e ajustes relacionados"
+ },
+ {
+  "sha": "af6704c",
+  "autor": "GubioGarcia",
+  "data": "2026-04-22T00:04:26Z",
+  "msg": "Integração da view de organizações e lista de projetos"
+ },
+ {
+  "sha": "3bc46c3",
+  "autor": "GubioGarcia",
+  "data": "2026-04-14T02:02:12Z",
+  "msg": "feat(project): implementacao inicial (#4)"
+ },
+ {
+  "sha": "5892351",
+  "autor": "GubioGarcia",
+  "data": "2026-04-14T02:01:38Z",
+  "msg": "feat(organization): implementacao inicial (#3)"
+ },
+ {
+  "sha": "c2eaca8",
+  "autor": "GubioGarcia",
+  "data": "2026-04-14T01:33:18Z",
+  "msg": "feat(project): implementacao inicial"
+ },
+ {
+  "sha": "c9d3786",
+  "autor": "GubioGarcia",
+  "data": "2026-04-14T01:30:54Z",
+  "msg": "feat(organization): implementacao inicial"
+ },
+ {
+  "sha": "ee66714",
+  "autor": "GubioGarcia",
+  "data": "2026-04-09T00:12:41Z",
+  "msg": "fix: correção erros no frontend e adição do frontend no container (#2)"
+ },
+ {
+  "sha": "7f8e133",
+  "autor": "GubioGarcia",
+  "data": "2026-04-09T00:10:01Z",
+  "msg": "fix: correção erros no frontend e adição do frontend no container"
+ },
+ {
+  "sha": "ab32f12",
+  "autor": "GubioGarcia",
+  "data": "2026-04-08T17:57:21Z",
+  "msg": "feat: Update README with improved formatting and content"
+ },
+ {
+  "sha": "52ee4a4",
+  "autor": "GubioGarcia",
+  "data": "2026-04-08T17:44:05Z",
+  "msg": "feat(frontend): adiciona estrutura inicial com React, Vite e arquitetura por features"
+ },
+ {
+  "sha": "56c502b",
+  "autor": "GubioGarcia",
+  "data": "2026-04-08T15:58:09Z",
+  "msg": "Merge branch 'feature/setup-infra-auth' into feature/create-routes-identity"
+ },
+ {
+  "sha": "374551e",
+  "autor": "GubioGarcia",
+  "data": "2026-04-08T15:55:11Z",
+  "msg": "feat(identity): ajustes finais antes de criar rotas"
+ },
+ {
+  "sha": "6f3bdaf",
+  "autor": "GubioGarcia",
+  "data": "2026-04-05T17:24:28Z",
+  "msg": "refactor(auth): integração com Keycloak, ajustes de segurança, mudança nas rotas de autenticação e i"
+ },
+ {
+  "sha": "ce08f44",
+  "autor": "GubioGarcia",
+  "data": "2026-04-02T00:23:43Z",
+  "msg": "feat(identity): implementar auto cadastro com integração ao Keycloak"
+ },
+ {
+  "sha": "f29d3ac",
+  "autor": "GubioGarcia",
+  "data": "2026-03-30T22:44:08Z",
+  "msg": "fix: correção em relação a fuso horário"
+ },
+ {
+  "sha": "9402a07",
+  "autor": "GubioGarcia",
+  "data": "2026-03-30T22:41:55Z",
+  "msg": "fix: correção de CORS e tratamento em relação a fuso horário"
+ },
+ {
+  "sha": "083fb98",
+  "autor": "GubioGarcia",
+  "data": "2026-03-26T01:03:15Z",
+  "msg": "feat: setup inicial da infraestrutura com docker e keycloak (#1)"
+ },
+ {
+  "sha": "cb9e7b7",
+  "autor": "GubioGarcia",
+  "data": "2026-03-26T00:56:23Z",
+  "msg": "feat: setup inicial da infraestrutura e backend"
+ },
+ {
+  "sha": "2bc4eb0",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:34:17Z",
+  "msg": "Define repository folder architecture"
+ },
+ {
+  "sha": "05847e5",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:33:13Z",
+  "msg": "Define repository folder architecture"
+ },
+ {
+  "sha": "840d85f",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:32:35Z",
+  "msg": "Define repository folder architecture"
+ },
+ {
+  "sha": "90df3fc",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:30:55Z",
+  "msg": "Create docker-compose.yml"
+ },
+ {
+  "sha": "3f44332",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:21:55Z",
+  "msg": "Create README for infrastructure documentation"
+ },
+ {
+  "sha": "0b1337e",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:19:33Z",
+  "msg": "Add README for frontend module of project governance"
+ },
+ {
+  "sha": "a291316",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T01:16:54Z",
+  "msg": "Add README.md for backend API documentation"
+ },
+ {
+  "sha": "34e02d9",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T00:54:38Z",
+  "msg": "Add LICENSE file with copyright and usage terms"
+ },
+ {
+  "sha": "6812448",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T00:52:58Z",
+  "msg": "Enhance README with project details and instructions"
+ },
+ {
+  "sha": "f81e37b",
+  "autor": "GubioGarcia",
+  "data": "2026-03-10T00:46:19Z",
+  "msg": "Initial commit"
+ }
+]
