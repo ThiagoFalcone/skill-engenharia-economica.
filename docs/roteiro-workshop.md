@@ -23,16 +23,19 @@ Objetivo: mostrar **ao vivo** como acionar a skill, interpretar os resultados e 
 - **Rigor matemático:** VPL = Σ FCₜ/(1+TMA)ᵗ; TIR zera o VPL; payback interpolado; CAUE para vidas diferentes; IDC=VA/CR, IDP=VA/VP, EAC=BAC/IDC.
 - **Honestidade:** premissas rotuladas; resultado negativo/limítrofe reportado como está.
 - **Arquitetura:** YAML válido, `name` = diretório, descrição que dispara no contexto certo, corpo < 5.000 tokens, scripts testados.
-- **Aplicação ao TCC:** esforço de 3 pessoas (864 h) confrontado com o COCOMO de referência (80 pessoa-mês, que superestima projetos com frameworks e IA); custo real (R$ 50.400) vs orçado (R$ 47.520) pelo GVA alimenta o CapEx.
+- **Aplicação ao TCC:** esforço medido no histórico real do GitHub (132 commits, 103,5 h pelo git-hours) e estimado em 517,5 h com cobertura de 20%, confrontado com o COCOMO de referência (80 pessoa-mês, que superestima projetos com frameworks e IA); o custo real (R$ 25.866) das janelas alimenta o CapEx pelo GVA.
 
 ## Banco de perguntas prováveis
-1. *Por que a TMA de 16%?* Juros básicos + prêmio de risco de produto digital em estágio inicial; é premissa e entra na sensibilidade.
-2. *Por que o VPL ficou tão perto de zero (R$ 1.941, TIR 16,7% × TMA 16%)?* O fluxo só fica positivo nos anos 4–5; com 7 anos o VPL sobe para R$ 124 mil (cenário `horizonte_7_anos`); o ponto de equilíbrio é ≈ 99% do volume do caso-base, por isso o veredito é "viável, porém no limite".
+1. *Por que a TMA de 17%?* Selic de 13,75% (Copom de novembro de 2026, a confirmar no Banco Central) mais prêmio de risco de cerca de 3,25 pontos; é premissa com fonte e entra na sensibilidade.
+2. *Por que o veredito é "viável" mas o payback descontado leva 4,46 anos e o cenário pessimista é negativo?* O fluxo só fica positivo nos anos 4 e 5; o VPL base é de R$ 24.456 (TIR de 29,3% contra TMA de 17%), mas com 30% menos clientes, preço 10% menor e custos e investimento maiores o VPL cai para -R$ 64.818. O ponto de equilíbrio é 86% do volume do caso-base e 89% do preço.
 3. *TIR ou VPL, qual decide?* VPL (valor absoluto criado); TIR confere; com várias TIR usa-se VPL/TIRM.
 4. *Por que payback descontado ≠ simples?* O descontado traz cada fluxo a valor presente pela TMA.
 5. *O que o IDC < 1 significa?* Cada R$ 1 gasto entregou menos de R$ 1 de valor orçado; EAC = BAC/IDC reprevê o custo final.
 6. *Depreciação afeta o caixa?* Não é desembolso; só reduz o imposto (escudo fiscal) se há lucro tributável, ver cenário `lucro_real`.
 7. *Por que não colocar mais testes?* Análise marginal: o nível "mutação/cobertura ~100%" custa R$ 15 mil a mais para entregar só R$ 4 mil (Δcusto > Δbenefício).
-8. *E se o preço fosse maior?* Mostrar o tornado (variar o preço em ±20% muda o VPL em uma amplitude de R$ 91 mil): preço é a maior alavanca; checar o teto pelo valor percebido.
+8. *E se o preço fosse maior?* Mostrar o tornado (variar o preço em ±20% muda o VPL em uma amplitude de R$ 87 mil): preço é a maior alavanca; checar o teto pelo valor percebido.
 9. *Como evitar o LLM errar conta?* Ele não calcula: executa `econ_core.py`, coberto por testes com valores conferidos à mão.
 10. *Funciona em outras LLMs?* Sim, é Agent Skills padrão; basta o agente ler `SKILL.md` e executar Python.
+11. *Como vocês estimaram as horas do TCC?* Pelo histórico real do GitHub: 132 commits de 10/03 a 02/11/2026 e o método git-hours dão 103,5 h medidas, que são um piso. Como commits capturam só parte do esforço, dividimos por uma cobertura de 20% (premissa explícita) e chegamos a 517,5 h. A sensibilidade do investimento mostra o que muda se essa premissa errar.
+12. *E o Luiz Fernando, que não tem commits?* O esforço dele (pesquisa, testes manuais, documentação) está embutido na cobertura de 20%; o relatório declara isso como limitação em vez de inventar horas individuais.
+13. *Por que o IDP caiu no meio do projeto?* O histórico mostra as janelas 8 a 11 (de 16/06 a 10/08) sem nenhum commit; o plano linear continuou avançando e o IDP caiu de 0,54 para 0,34, recuperando até 1,00 com as entregas de agosto a outubro.

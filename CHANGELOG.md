@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0] - 2026-11-11
+### Adicionado
+- `historico_git.py`: esforço medido (git-hours), sprints e valor entregue por pull requests a partir do histórico do GitHub.
+- 4 testes novos (61 no total) e valoração do TCC com esforço real (132 commits, 26 pull requests), seção 3.0 de evidências e seção 15 de fontes de mercado com data e confiança.
+- Cenário `simples_anexo_v` para o risco tributário.
+
+### Alterado
+- GVA do TCC calculado do histórico real, em vez de valores ilustrativos; TMA de 17% com base na Selic.
+
 ## [1.0.0] - 2026-11-11
 ### Adicionado
 - Skill `engenharia-economica-software` no padrão Agent Skills, com `SKILL.md`, 9 referências por aula e 5 modelos JSON.

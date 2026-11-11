@@ -2,7 +2,7 @@
 
 **Skill de valoração e viabilidade financeira de projetos de software**, no padrão aberto [Agent Skills](https://agentskills.io), com Claude Code como plataforma principal.
 
-![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Dependências](https://img.shields.io/badge/dependências-0-brightgreen) ![Testes](https://img.shields.io/badge/testes-57-brightgreen) ![Licença](https://img.shields.io/badge/licença-MIT-lightgrey)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Dependências](https://img.shields.io/badge/dependências-0-brightgreen) ![Testes](https://img.shields.io/badge/testes-61-brightgreen) ![Licença](https://img.shields.io/badge/licença-MIT-lightgrey)
 
 | | |
 |---|---|
@@ -35,16 +35,16 @@ Cada exigência do PDF da situação de aprendizagem e onde ela está atendida:
 | Relatório em `examples/tcc-valuation-report.md` com fluxo de caixa, VPL, TIR, payback, GVA e modelo de negócio | Seções 4, 5, 8 e 12 do relatório | Atendido |
 | Conteúdo das Aulas 1 a 12 | Tabela da seção 3 | Atendido |
 | Mini workshop com demonstração ao vivo | Slides em PDF e roteiro com banco de perguntas | Material pronto |
-| Estimativas reais de esforço e premissas de mercado | `examples/tcc-input.json` (esforço de 3 pessoas, 864 h) | Premissas de exemplo, marcadas como tal (ver seção 7) |
+| Estimativas reais de esforço e premissas de mercado | Esforço medido no histórico do GitHub (`examples/dados/`) e premissas com fonte na seção 15 do relatório | Atendido com ressalvas declaradas (ver seção 7) |
 
 **Como cada critério de avaliação é sustentado:**
 
 | Critério (peso) | Evidência no repositório |
 |---|---|
-| Fundamentação em engenharia econômica (3,0) | 57 testes com valores conferidos à mão, inclusive casos de borda (sem TIR, várias TIR, divisão por zero) |
+| Fundamentação em engenharia econômica (3,0) | 61 testes com valores conferidos à mão, inclusive casos de borda (sem TIR, várias TIR, divisão por zero) |
 | Engenharia e arquitetura da skill (2,5) | Validação automática de YAML, tamanho do corpo, referências citadas e cópia `.claude` idêntica à canônica |
 | Documentação e repositório (1,5) | Este README, `CONTRIBUTING.md`, `CHANGELOG.md`, CI no GitHub em Python 3.9 e 3.12 |
-| Aplicação prática no TCC (1,5) | Relatório com 14 seções, reproduzível byte a byte por comando |
+| Aplicação prática no TCC (1,5) | Relatório com 15 seções, esforço medido no histórico real do GitHub, premissas com fonte e reprodução byte a byte por comando |
 | Mini workshop (1,5) | `docs/roteiro-workshop.md` com tempos por bloco, defesa e 10 perguntas prováveis |
 
 ## 3. Cobertura das Aulas 1 a 12
@@ -65,7 +65,9 @@ Cada exigência do PDF da situação de aprendizagem e onde ela está atendida:
 - **Leitura por perfil de decisor:** o mesmo resultado explicado ao investidor, ao Product Owner e ao líder técnico.
 - **Honestidade por construção:** veredito em três níveis (viável, no limite, não viável) e recusa explícita a ajustar premissa só para o VPL ficar positivo.
 - **Ponto de equilíbrio e preço de equilíbrio** calculados por bisseção, mais sensibilidade em formato tornado.
+- **Esforço real a partir do histórico do GitHub:** o `historico_git.py` mede horas (git-hours), sprints e valor entregue por pull requests, e o GVA nasce desses dados.
 - **Integração entre GVA e fluxo de caixa:** o custo real das sprints vira o CapEx do modelo.
+- **Fontes e confiança declaradas:** cada premissa de mercado traz fonte, data da consulta e nível de confiança (seção 15 do relatório).
 - **Gráfico em texto** do fluxo acumulado dentro do próprio Markdown.
 - **Reprodutibilidade:** o relatório versionado é regenerado no CI e comparado byte a byte.
 - **Sem dependências:** só biblioteca padrão do Python, funcionando em qualquer agente.
@@ -138,6 +140,11 @@ Priorize o backlog por WSJF e diga até onde vale investir em qualidade de teste
 Monte a proposta econômica (sumário executivo, cenários e riscos) deste projeto.
 ```
 
+Esforço real de um repositório (usa a API pública do GitHub):
+```bash
+python .agents/skills/engenharia-economica-software/scripts/historico_git.py --repo GubioGarcia/Plataforma-Governanca-Software --cache examples/dados --saida historico.json
+```
+
 Uso direto dos scripts, sem agente:
 ```bash
 cd .agents/skills/engenharia-economica-software/scripts
@@ -149,34 +156,38 @@ python gerar_relatorio.py --entrada ../assets/modelo-entrada.json --saida relato
 
 ## 7. Demonstração prática: valoração do TCC da equipe
 
-O TCC avaliado é a **Plataforma de Governança de Projetos de Software** (Java 21 com Spring Boot 4, React 19, Keycloak, PostgreSQL; 28,5 mil linhas medidas no repositório, 284 testes de backend, 232 verificações de API e 70 testes de interface), desenvolvida por **3 pessoas** em 12 sprints planejadas com o orientador, com ferramentas gratuitas e um pouco de Claude pago. Foi tratada como produto SaaS B2B por organização, a **R$ 179 por mês**.
+O TCC avaliado é a **Plataforma de Governança de Projetos de Software** (Java 21 com Spring Boot 4, React 19, Keycloak, PostgreSQL; 28,5 mil linhas medidas no repositório, 284 testes de backend, 232 verificações de API e 70 testes de interface), desenvolvida por **3 pessoas** com ferramentas gratuitas e um pouco de Claude pago, sprints planejadas com o orientador. Foi tratada como produto SaaS B2B por organização, a **R$ 179 por mês**.
+
+**Esforço real, medido no GitHub.** O script `historico_git.py` leu o [repositório do TCC](https://github.com/GubioGarcia/Plataforma-Governanca-Software): 132 commits de 10/03 a 02/11/2026 (34 semanas) e 26 pull requests de entrega. Pelo método git-hours são **103,5 h medidas** (Gubio 94,4 h, Thiago 9,1 h), um piso, porque pesquisa, testes manuais e reuniões não geram commit. Com cobertura de 20% (premissa explícita) o esforço estimado é **517,5 h**, a R$ 50 por hora. O histórico também revelou uma pausa de 8 semanas sem commits (junho e julho), que derruba o IDP no GVA. Os dados ficam em [`examples/dados/`](examples/dados/) para qualquer pessoa reproduzir.
 
 Reprodução do relatório completo:
 ```bash
 python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py --entrada examples/tcc-input.json --saida examples/tcc-valuation-report.md
 ```
 
-| Indicador (caso-base, 5 anos, TMA de 16%) | Resultado |
+| Indicador (caso-base, 5 anos, TMA de 17%) | Resultado |
 |---|---|
-| Esforço | 3 pessoas × 288 h = 864 h (R$ 47.520 orçados; R$ 50.400 reais pelo GVA) |
-| Investimento inicial (CapEx) | R$ 55.800 |
-| VPL | **R$ 1.941** |
-| TIR | **16,7%** (TMA de 16%) |
-| Payback simples e descontado | 4,28 anos e 4,96 anos |
-| Veredito | **Viável, porém no limite** (VPL abaixo de 5% do investimento) |
-| Ponto de equilíbrio | 99% do volume de clientes (cerca de 99 organizações no ano 5) |
-| Cenário otimista | VPL de R$ 100.409 e TIR de 45,7% |
-| Cenário pessimista | VPL de -R$ 95.189 |
-| Regime Lucro Real (34% de IRPJ/CSLL) | VPL de -R$ 18.121 e TIR de 8,6% |
-| Horizonte de 7 anos | VPL de R$ 124.172 e TIR de 39,5% |
-| LTV/CAC e payback do CAC | 14,8 e 2,3 meses |
-| GVA ao fim das 12 sprints | IDC 0,94, IDP 1,00, EAC de R$ 50.400 (BAC de R$ 47.520) |
-| Hospedagem (CAUE em 5 anos) | VM Oracle Always Free R$ 4.058 por ano; nuvem gerenciada R$ 21.626; on-premises R$ 21.962 |
+| Esforço | 103,5 h medidas, 517,5 h estimadas, custo real de R$ 25.866 (BAC do plano de R$ 30.471) |
+| Investimento inicial (CapEx) | R$ 31.266 |
+| VPL | **R$ 24.456** |
+| TIR | **29,3%** (TMA de 17%) |
+| Payback simples e descontado | 4,02 anos e 4,46 anos |
+| Veredito | **Viável**; payback descontado em atenção e cenário pessimista negativo |
+| Ponto de equilíbrio | 86% do volume de clientes ou 89% do preço |
+| Cenário otimista | VPL de R$ 117.264 e TIR de 64,6% |
+| Cenário pessimista | VPL de -R$ 64.818 |
+| Lucro Real (34% de IRPJ/CSLL) e Simples Anexo V (15,5%) | VPL de R$ 5.866 e R$ 4.003 |
+| Horizonte de 7 anos | VPL de R$ 138.913 e TIR de 52,1% |
+| LTV/CAC e payback do CAC | 14,6 e 2,3 meses |
+| GVA ao fim das 17 janelas | IDC 1,18, IDP 1,00, EAC de R$ 25.866; o IDP caiu de 0,54 para 0,34 na pausa de commits |
+| Hospedagem (CAUE em 5 anos) | VM Oracle Always Free R$ 4.069 por ano; nuvem gerenciada R$ 21.589; on-premises R$ 22.227 |
 | Qualidade ("bom o suficiente") | Parar nos testes de interface automatizados; mutação e 100% de cobertura custam mais do que entregam |
 
-**Leitura honesta:** o resultado é positivo, mas fica quase em cima da TMA. A decisão depende de preço, volume e custos (variar cada um em 20% muda o VPL em R$ 71 a 91 mil) e do horizonte.
+**Leitura honesta:** o projeto se paga, mas o resultado depende de preço, volume e custos (variar cada um em 20% muda o VPL em R$ 67 a 87 mil) e o cenário pessimista é negativo.
 
-> **Contexto acadêmico e transparência das premissas.** Do repositório do TCC foram **medidos** apenas o tamanho e a estrutura (linhas, testes, módulos, infraestrutura). A equipe de 3 pessoas, as ferramentas gratuitas, o pouco Claude pago, a maior parte das horas em testes manuais e as sprints planejadas com o orientador vêm do relato do grupo. Horas exatas, custo por hora, preço, clientes, churn, CAC, custos de operação, TMA e os valores de GVA por sprint são **premissas de exemplo** coerentes com esse contexto, não registros contábeis (campo `origem_dos_numeros` do JSON e seção 13 do relatório). Havendo dados reais, edite `examples/tcc-input.json` e regenere o relatório com o comando acima.
+**Premissas de mercado com fonte** (seção 15 do relatório, consultadas em 11/11/2026): Selic de 13,75% (Copom, a confirmar no Banco Central), faixa salarial de desenvolvedor pleno da Robert Half com fator de senioridade de 0,7, preço do Jira Standard (cerca de US$ 7,91 por usuário) como âncora de preço, churn de 3% a 5% ao mês para SaaS B2B de pequenas e médias empresas e as faixas do Simples Nacional. Várias fontes são blogs; a confiança de cada uma está declarada.
+
+> **Transparência.** São **medidos**: tamanho do código, histórico de commits e pull requests. São **estimados com fonte**: cobertura de commits (20%), custo por hora, preço, clientes, churn, CAC, custos de operação e TMA. O **plano das sprints com o orientador** não estava disponível, então o valor planejado do GVA é linear (6 h por semana por pessoa); com o plano real, basta informá-lo. Luiz Fernando não tem commits e seu esforço está embutido na cobertura.
 
 ## 8. Estrutura do repositório
 
@@ -187,12 +198,13 @@ python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py -
     econ_core.py              fórmulas das aulas 1 a 12
     econ_cli.py               16 comandos: vpl, tir, payback, gva, markup, saas, comparar, priorizar...
     gerar_relatorio.py        relatório Markdown completo a partir de um JSON
+    historico_git.py          esforço, sprints e valor entregue a partir do histórico do GitHub
   references/                 teoria e critérios de decisão, um arquivo por tema das aulas
   assets/                     modelo-entrada.json e 4 exemplos de entrada do CLI
 .claude/skills/...            cópia para o Claude Code (gerada por instalar.py)
-examples/                     tcc-input.json e tcc-valuation-report.md
+examples/                     tcc-input.json, tcc-valuation-report.md e dados/ (snapshot do histórico do TCC)
 evals/evals.json              10 casos de avaliação (7 numéricos, verificados por teste)
-tests/                        57 testes: fórmulas, CLI, estrutura da skill, relatório e evals
+tests/                        61 testes: fórmulas, CLI, estrutura da skill, relatório e evals
 docs/                         roteiro do workshop, slides em PDF e o gerador dos slides
 instalar.py                   instalador (Claude Code e genérico)
 ```

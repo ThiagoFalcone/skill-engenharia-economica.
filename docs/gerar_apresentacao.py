@@ -194,6 +194,8 @@ class Deck:
 def main():
     with open(os.path.join(RAIZ, "examples", "tcc-input.json"), encoding="utf-8") as fh:
         entrada = json.load(fh)
+    entrada = gr.normalizar(entrada)
+    hist = entrada.get("historico")
     modelo = gr.preparar_modelo(entrada)
     ind = ec.indicadores(modelo)
     det = ind["detalhe"]
@@ -266,7 +268,7 @@ def main():
         ["scripts/gerar_relatorio.py", "Relatório Markdown completo a partir de um JSON"],
         ["references/ (9 arquivos)", "Teoria e critérios de decisão, um tema por arquivo"],
         ["examples/", "tcc-input.json e tcc-valuation-report.md (valoração do TCC)"],
-        ["evals/ · tests/", "10 evals e 57 testes (fórmulas, CLI, estrutura, relatório)"],
+        ["evals/ · tests/", "10 evals e 61 testes (fórmulas, CLI, estrutura, relatório)"],
     ], 17, 46)
 
     # 5 aulas
@@ -283,7 +285,7 @@ def main():
 
     # 6 confiabilidade
     d.slide("Por que dá para confiar nos números", "O LLM orquestra; o Python calcula")
-    d.card(60, 440, 360, 150, "Testes automatizados", "57", TEAL, "fórmulas conferidas à mão")
+    d.card(60, 440, 360, 150, "Testes automatizados", "61", TEAL, "fórmulas conferidas à mão")
     d.card(460, 440, 360, 150, "Evals", "10", AMBER, "7 numéricos reexecutados no teste")
     d.card(860, 440, 360, 150, "Dependências", "0", NAVY, "só biblioteca padrão do Python")
     d.bullets(60, 370, [
@@ -294,19 +296,19 @@ def main():
 
     # 7 TCC
     d.slide("O TCC avaliado", "Plataforma de Governança de Projetos de Software")
-    d.bullets(60, 590, [
+    d.bullets(60, 555, [
         f"SaaS B2B para discovery e elicitação de requisitos: projetos, requisitos, rastreabilidade, modelagem de dados, auditoria e pesquisa.",
         f"Tamanho medido no repositório: {num(kloc, 1)} mil linhas (Java e TypeScript), {m['testes_backend_readme']} testes de backend, {m['testes_ui_e2e_readme']} de interface.",
         "Stack: Java 21 + Spring Boot 4, React 19, Keycloak, PostgreSQL 15, Docker. Hospedagem: VM Oracle Always Free.",
-        "Equipe: 3 pessoas, 12 sprints planejadas com o orientador, ferramentas gratuitas e pouco Claude pago.",
+        f"Equipe de 3 pessoas, {len(gva['sprints'])} janelas de 2 semanas ({hist['periodo']['inicio'][8:]}/{hist['periodo']['inicio'][5:7]} a {hist['periodo']['fim'][8:]}/{hist['periodo']['fim'][5:7]}/2026), sprints planejadas com o orientador, ferramentas gratuitas e pouco Claude pago.",
     ], 1160, 22)
     d.rect(60, 120, 1160, 110, HexColor("#FFF6E0"), stroke=AMBER)
-    d.paragrafo(90, 195, "Transparência: do repositório foi medido o tamanho; horas, preço, clientes, churn, custos de operação, TMA e os valores por sprint são premissas de exemplo coerentes com o contexto acadêmico.", 1100, 19, INK)
+    d.paragrafo(90, 195, f"Medido: tamanho do código e histórico real do GitHub ({hist['commits']} commits, {hist['prs_entregues']} PRs de entrega, {num(hist['horas_medidas'], 1)} h). Estimado, com fonte: horas totais (cobertura de {hist['parametros']['cobertura'] * 100:.0f}%), custo por hora, preço, clientes, churn e TMA.", 1100, 19, INK)
 
     # 8 custos
     d.slide("Custo, preço e valor (Aula 4)", "Direto × indireto · CapEx × OpEx")
     d.tabela(60, 590, [560, 200, 400], ["Item de investimento (ano 0)", "Valor", "Natureza"], [
-        [f"Mão de obra: 3 pessoas × 288 h (custo real pelo GVA)", brl(cd["direto"]), "Direto · CapEx"],
+        [f"Mão de obra: {num(hist['horas_estimadas'], 0)} h estimadas pelo histórico (custo real pelo GVA)", brl(cd["direto"]), "Direto · CapEx"],
         ["Ferramentas, IA paga e domínio, rateados por horas", brl(cd["indireto"]), "Indireto · CapEx"],
         ["Lançamento e adequação jurídica (LGPD, marca)", brl(sum(cd["outros"].values())), "Outro · CapEx"],
         ["**Investimento total**", f"**{brl(det['capex'])}**", ""],
@@ -338,9 +340,19 @@ def main():
     d.card(660, 440, 280, 150, "Payback simples", f"{num(ind['payback_simples'], 2)} anos", NAVY, "interpolado")
     d.card(960, 440, 260, 150, "Payback desc.", f"{num(ind['payback_descontado'], 2)} anos", NAVY, "à TMA")
     d.rect(60, 250, 1160, 140, HexColor("#E6F6F3"), stroke=TEAL)
-    d.texto(90, 345, "Veredito: VIÁVEL, PORÉM NO LIMITE", 30, INK, BOLD)
-    d.paragrafo(90, 305, f"VPL < 5% do investimento ({brl(det['capex'])}) e TIR apenas acima da TMA. O ponto de equilíbrio é "
-                         f"{num(f_eq * 100, 0)}% do volume de clientes do caso-base: pequenas mudanças de premissa invertem a decisão.", 1100, 20, INK)
+    viavel_ = ind["vpl"] > 0 and ind["tir"] is not None and ind["tir"] > ind["tma"]
+    limite_ = abs(ind["vpl"]) <= 0.05 * det["capex"]
+    if viavel_ and not limite_:
+        veredito_, detalhe_ = "Veredito: VIÁVEL", (f"VPL de {brl(ind['vpl'])} sobre um investimento de {brl(det['capex'])} e TIR de {pct(ind['tir'])} contra TMA de "
+                                                 f"{pct(ind['tma'], 0)}. O ponto de equilíbrio é {num(f_eq * 100, 0)}% do volume de clientes do caso-base, mas o cenário pessimista "
+                                                 f"({brl(cen['pessimista']['vpl'])}) mostra que o resultado depende de preço e volume.")
+    elif limite_:
+        veredito_, detalhe_ = "Veredito: NO LIMITE DA VIABILIDADE", (f"VPL < 5% do investimento ({brl(det['capex'])}); o ponto de equilíbrio é "
+                                                                   f"{num(f_eq * 100, 0)}% do volume de clientes: pequenas mudanças de premissa invertem a decisão.")
+    else:
+        veredito_, detalhe_ = "Veredito: NÃO VIÁVEL NO CASO-BASE", "VPL negativo ou TIR abaixo da TMA; ver cenários e alavancas."
+    d.texto(90, 345, veredito_, 30, INK, BOLD)
+    d.paragrafo(90, 305, detalhe_, 1100, 20, INK)
     d.bullets(60, 195, ["Índice de lucratividade " + num(ind["indice_lucratividade"], 3) + " · ROI descontado " + pct(ind["roi_descontado"]) +
                         " · TIRM " + pct(ind["tirm"])], 1160, 20)
 
@@ -363,8 +375,15 @@ def main():
         d.texto(850, y - 24, rot[niv], 15, cores[niv], BOLD)
         d.texto(960, y - 24, regra, 14, MUTED)
         y -= 40
-    d.paragrafo(60, 130, "Leitura: verde em unidade econômica (LTV/CAC) e prazo; amarelo em VPL, TIR, payback e custo; vermelho no cenário pessimista. "
-                         "É o retrato honesto de um produto acadêmico ainda sem validação de mercado.", 1150, 18, MUTED)
+    grupos_ = {"bom": [], "medio": [], "ruim": []}
+    for crit_, _r, niv_, _g in gr.semaforo(entrada, modelo, ind, saas, cen):
+        curto_ = ("payback descontado" if crit_.startswith("Payback descontado") else
+                  "payback do CAC" if crit_.startswith("Payback do CAC") else
+                  "cenário pessimista" if crit_.startswith("Cenário") else crit_.split(" ")[0])
+        grupos_[niv_].append(curto_)
+    leitura_ = "Leitura: " + "; ".join(f"{nome_} em {', '.join(grupos_[k_])}" for k_, nome_ in
+                                      (("bom", "verde"), ("medio", "amarelo"), ("ruim", "vermelho")) if grupos_[k_])
+    d.paragrafo(60, 130, leitura_ + ". É o retrato honesto de um produto acadêmico ainda sem validação de mercado.", 1150, 18, MUTED)
 
     # 10c três visões
     d.slide("Três visões do mesmo resultado", "O mesmo relatório, lido por quem decide")
@@ -391,13 +410,19 @@ def main():
 
     # 11 cenários
     d.slide("Cenários e sensibilidade (Aula 7)", "O que precisa ser verdade para o projeto valer a pena")
-    nomes = ["pessimista", "base", "otimista", "lucro_real", "horizonte_7_anos"]
-    rot = ["Pessim.", "Base", "Otimista", "Lucro real", "7 anos"]
+    nomes = [n_ for n_ in ("pessimista", "base", "otimista", "lucro_real", "simples_anexo_v", "horizonte_7_anos") if n_ in cen]
+    rot = [{"pessimista": "Pessim.", "base": "Base", "otimista": "Otimista", "lucro_real": "Lucro real",
+            "simples_anexo_v": "Anexo V", "horizonte_7_anos": "7 anos"}[n_] for n_ in nomes]
     d.barras(70, 200, 560, 290, rot, [cen[n]["vpl"] / 1000 for n in nomes], "VPL por cenário (R$ mil)", lambda v: f"{v:,.0f}")
     nm = {"fator_clientes": "Clientes", "fator_preco": "Preço", "fator_custos": "Custos", "fator_capex": "Investimento", "tma": "TMA"}
     d.barras(700, 200, 520, 290, [nm[s["fator"]] for s in sens], [s["amplitude"] / 1000 for s in sens],
              "Sensibilidade ±20% (amplitude do VPL, R$ mil)", lambda v: f"{v:,.0f}", cor_pos=AMBER)
-    d.texto(60, 100, "Alavancas: preço, volume e custos. No regime Lucro Real o VPL fica negativo; com horizonte maior, positivo.", 18, MUTED)
+    negativos_ = [n_ for n_ in nomes if cen[n_]["vpl"] < 0]
+    d.paragrafo(60, 100, "Alavancas: preço, volume e custos. "
+                + (f"Só o cenário {', '.join(negativos_)} tem VPL negativo; " if negativos_ else "Nenhum cenário tem VPL negativo; ")
+                + (f"Lucro Real e Anexo V reduzem o VPL para {brl(cen['lucro_real']['vpl'])} e {brl(cen['simples_anexo_v']['vpl'])}, "
+                   f"e o horizonte de 7 anos o leva a {brl(cen['horizonte_7_anos']['vpl'])}." if "simples_anexo_v" in cen and "lucro_real" in cen and "horizonte_7_anos" in cen else ""),
+                1150, 18, MUTED)
 
     # 12 SaaS
     d.slide("Métricas de produto digital (Aula 8)", "CAC, LTV e depreciação")
@@ -413,14 +438,22 @@ def main():
     ], 1160, 21)
 
     # 13 GVA
-    d.slide("Eficiência ágil: GVA / EVM (Aula 9)", "12 sprints planejadas com o orientador · IDC e IDP acumulados")
+    d.slide("Eficiência ágil: GVA / EVM (Aula 9)", f"{len(serie)} janelas de 2 semanas do histórico real do GitHub · IDC e IDP acumulados")
     d.linhas(70, 230, 640, 280, [("IDC (custo)", RED, [s["idc"] for s in serie]), ("IDP (prazo)", TEAL, [s["idp"] for s in serie])],
              "Índices por sprint (1,0 = no orçamento/prazo)", ref=1.0)
     u = serie[-1]
-    d.card(780, 400, 440, 130, "IDC final", num(u["idc"], 2), RED, "gastou mais do que o valor entregue")
+    d.card(780, 400, 440, 130, "IDC final", num(u["idc"], 2), RED if u["idc"] < 0.995 else TEAL,
+           "gastou mais do que o valor entregue" if u["idc"] < 0.995 else "custo abaixo do valor entregue")
     d.card(780, 250, 440, 130, "EAC final", brl(u["eac"]), AMBER, f"BAC {brl(gva['bac'])} · VAC {brl(u['vac'])}")
-    d.paragrafo(60, 130, "A maior parte das horas foi de testes manuais: retrabalho no início (IDC 0,79) que a equipe recuperou ao longo das sprints "
-                         "(IDP chega a 1,00). O custo real alimenta o CapEx do modelo.", 1150, 18, MUTED)
+    sem_ = [j_["sprint"] for j_ in hist["janelas"] if j_["commits"] == 0]
+    if sem_ and sem_[0] > 1 and sem_[-1] < len(serie):
+        pausa_ = (f"Nas janelas {sem_[0]} a {sem_[-1]}, sem nenhum commit, o IDP caiu de {num(serie[sem_[0] - 2]['idp'], 2)} para "
+                  f"{num(serie[sem_[-1] - 1]['idp'], 2)}; ")
+    else:
+        pausa_ = ""
+    d.paragrafo(60, 130, pausa_ + f"as entregas seguintes o levaram a {num(u['idp'], 2)}. O plano linear de "
+                f"{hist['parametros']['horas_semana_pessoa_planejadas']:g} h por semana por pessoa é premissa. O custo real alimenta o CapEx do modelo.",
+                1150, 18, MUTED)
 
     # 14 estratégia
     d.slide("Estratégia, priorização e bom o suficiente (Aulas 10 a 12)")
