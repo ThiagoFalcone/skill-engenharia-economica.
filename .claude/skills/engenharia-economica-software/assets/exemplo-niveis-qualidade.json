@@ -1,0 +1,20 @@
+{
+  "descricao": "Níveis acumulados de investimento em qualidade.",
+  "niveis": [
+    {
+      "nome": "Básico",
+      "custo": 3000,
+      "beneficio": 9000
+    },
+    {
+      "nome": "Intermediário",
+      "custo": 7000,
+      "beneficio": 14000
+    },
+    {
+      "nome": "Excelente",
+      "custo": 15000,
+      "beneficio": 16000
+    }
+  ]
+}

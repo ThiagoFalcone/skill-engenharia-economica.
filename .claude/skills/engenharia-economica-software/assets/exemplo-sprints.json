@@ -1,0 +1,30 @@
+{
+  "nota": "Valores por sprint em R$ (não acumulados). Substitua pelos reais.",
+  "bac": 24000,
+  "sprints": [
+    {
+      "sprint": 1,
+      "planejado": 6000,
+      "agregado": 5000,
+      "real": 6200
+    },
+    {
+      "sprint": 2,
+      "planejado": 6000,
+      "agregado": 6000,
+      "real": 6000
+    },
+    {
+      "sprint": 3,
+      "planejado": 6000,
+      "agregado": 6500,
+      "real": 6100
+    },
+    {
+      "sprint": 4,
+      "planejado": 6000,
+      "agregado": 6500,
+      "real": 6000
+    }
+  ]
+}

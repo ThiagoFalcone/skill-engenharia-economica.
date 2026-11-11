@@ -1,0 +1,30 @@
+{
+  "descricao": "Hospedagem em produção, comparada por CAUE.",
+  "alternativas": [
+    {
+      "nome": "Nuvem gerenciada",
+      "investimento": 3000,
+      "custo_anual": [
+        12000,
+        18000,
+        24000,
+        30000,
+        36000
+      ],
+      "vida": 5
+    },
+    {
+      "nome": "VM simples",
+      "investimento": 1000,
+      "custo_anual": 4000,
+      "vida": 5
+    },
+    {
+      "nome": "On-premises",
+      "investimento": 25000,
+      "custo_anual": 8000,
+      "vida": 5,
+      "valor_residual": 3000
+    }
+  ]
+}

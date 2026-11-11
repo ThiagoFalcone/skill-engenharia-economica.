@@ -1,0 +1,29 @@
+[
+  {
+    "nome": "Item A",
+    "valor": 8,
+    "esforco": 3,
+    "valor_negocio": 8,
+    "criticidade_tempo": 5,
+    "reducao_risco": 2,
+    "tamanho": 3
+  },
+  {
+    "nome": "Item B",
+    "valor": 6,
+    "esforco": 8,
+    "valor_negocio": 6,
+    "criticidade_tempo": 3,
+    "reducao_risco": 4,
+    "tamanho": 8
+  },
+  {
+    "nome": "Item C",
+    "valor": 4,
+    "esforco": 2,
+    "valor_negocio": 4,
+    "criticidade_tempo": 2,
+    "reducao_risco": 1,
+    "tamanho": 2
+  }
+]

@@ -133,6 +133,17 @@ class TestCLI(unittest.TestCase):
             os.unlink(tmp.name)
         self.assertIn("modelo", dados)
 
+    def test_assets_de_exemplo_rodam_no_cli(self):
+        a = os.path.join(SKILL, "assets")
+        casos = [("priorizar", "--arquivo", os.path.join(a, "exemplo-backlog.json"), "--metodo", "wsjf"),
+                 ("comparar", "--taxa", "0.15", "--arquivo", os.path.join(a, "exemplo-alternativas.json")),
+                 ("suficiente", "--arquivo", os.path.join(a, "exemplo-niveis-qualidade.json")),
+                 ("gva-sprints", "--arquivo", os.path.join(a, "exemplo-sprints.json"))]
+        for c in casos:
+            r = self.rodar(*c)
+            self.assertEqual(r.returncode, 0, f"{c[0]}: {r.stderr}")
+            json.loads(r.stdout)
+
     def test_erro_de_entrada(self):
         r = self.rodar("priorizar", "--arquivo", "nao-existe.json")
         self.assertEqual(r.returncode, 2)
