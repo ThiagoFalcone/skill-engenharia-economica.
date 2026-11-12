@@ -296,7 +296,7 @@ Níveis acumulados de investimento em qualidade de testes (custo) versus perdas 
 - TMA: Selic de 13,75% a.a. (Copom, nov/2026, a confirmar no site do Banco Central) + prêmio de risco de produto digital em estágio inicial de cerca de 3,25 pontos percentuais = 17% a.a.
 - Preço, clientes, churn e CAC são premissas ancoradas em fontes públicas, mas não validadas com clientes pagantes.
 - As horas medidas (103,5 h) são um piso derivado dos horários dos commits; a cobertura de 20% (horas estimadas = 517,5 h) é premissa e entra na sensibilidade do investimento.
-- Luiz Fernando não tem commits próprios no repositório; ele editou documentos, contribuiu com ideias e com parte do código, e esse esforço está embutido na cobertura de 20% e não em horas próprias.
+- Luiz Fernando não tem commits próprios no repositório, mas contribuiu de forma substancial (documentos, ideias e parte do código); esse esforço está embutido na cobertura de 20% e não em horas próprias, o que torna a estimativa de horas conservadora.
 - O plano das sprints com o orientador não estava disponível: o valor planejado é linear, com 6 horas por semana por pessoa. Substitua pelo plano real para um GVA exato.
 - O custo por hora de mercado valora o esforço (custo de oportunidade), não é desembolso: a equipe não foi remunerada.
 - A hospedagem gratuita não tem SLA; vender como SaaS exige migrar ou contratar suporte.
