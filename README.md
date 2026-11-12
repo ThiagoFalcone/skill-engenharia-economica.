@@ -187,7 +187,7 @@ python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py -
 
 **Premissas de mercado com fonte** (seção 15 do relatório, consultadas em 11/11/2026): Selic de 13,75% (Copom, a confirmar no Banco Central), faixa salarial de desenvolvedor pleno da Robert Half com fator de senioridade de 0,7, preço do Jira Standard (cerca de US$ 7,91 por usuário) como âncora de preço, churn de 3% a 5% ao mês para SaaS B2B de pequenas e médias empresas e as faixas do Simples Nacional. Várias fontes são blogs; a confiança de cada uma está declarada.
 
-> **Transparência.** São **medidos**: tamanho do código, histórico de commits e pull requests. São **estimados com fonte**: cobertura de commits (20%), custo por hora, preço, clientes, churn, CAC, custos de operação e TMA. O **plano das sprints com o orientador** não estava disponível, então o valor planejado do GVA é linear (6 h por semana por pessoa); com o plano real, basta informá-lo. Luiz Fernando não tem commits e seu esforço está embutido na cobertura.
+> **Transparência.** São **medidos**: tamanho do código, histórico de commits e pull requests. São **estimados com fonte**: cobertura de commits (20%), custo por hora, preço, clientes, churn, CAC, custos de operação e TMA. O **plano das sprints com o orientador** não estava disponível, então o valor planejado do GVA é linear (6 h por semana por pessoa); com o plano real, basta informá-lo. Luiz Fernando editou documentos, contribuiu com ideias e com parte do código, mas isso não aparece como commits próprios; seu esforço está embutido na cobertura.
 
 ## 8. Estrutura do repositório
 
