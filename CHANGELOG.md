@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0] - 2026-11-13
+### Adicionado
+- Comandos `equilibrio` (investimento máximo e queda de receita que zeram o VPL) e `estresse` (indicadores com custo e/ou receita multiplicados por um fator) no `econ_cli.py`, agora 18 comandos.
+- 4 testes novos (65 no total) e linhas novas no mapa pergunta → comando do `SKILL.md`.
+
+### Alterado
+- Regra 1 do `SKILL.md` cobre também somas e multiplicações simples, depois que um teste com agente mostrou contas feitas de cabeça no ponto de equilíbrio.
+
 ## [1.1.0] - 2026-11-11
 ### Adicionado
 - `historico_git.py`: esforço medido (git-hours), sprints e valor entregue por pull requests a partir do histórico do GitHub.

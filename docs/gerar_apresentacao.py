@@ -264,11 +264,11 @@ def main():
     d.tabela(60, 590, [420, 740], ["Pasta / arquivo", "Papel"], [
         [".agents/skills/engenharia-economica-software/", "Skill canônica: SKILL.md, scripts/, references/, assets/"],
         ["scripts/econ_core.py", "Fórmulas das aulas 1–12 (somente biblioteca padrão)"],
-        ["scripts/econ_cli.py", "16 comandos: vpl, tir, payback, gva, markup, saas, comparar..."],
+        ["scripts/econ_cli.py", "18 comandos: vpl, tir, payback, gva, markup, equilibrio..."],
         ["scripts/gerar_relatorio.py", "Relatório Markdown completo a partir de um JSON"],
         ["references/ (9 arquivos)", "Teoria e critérios de decisão, um tema por arquivo"],
         ["examples/", "tcc-input.json e tcc-valuation-report.md (valoração do TCC)"],
-        ["evals/ · tests/", "10 evals e 61 testes (fórmulas, CLI, estrutura, relatório)"],
+        ["evals/ · tests/", "10 evals e 65 testes (fórmulas, CLI, estrutura, relatório)"],
     ], 17, 46)
 
     # 5 aulas

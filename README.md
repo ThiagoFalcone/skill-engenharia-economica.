@@ -2,7 +2,7 @@
 
 **Skill de valoração e viabilidade financeira de projetos de software**, no padrão aberto [Agent Skills](https://agentskills.io), com Claude Code como plataforma principal.
 
-![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Dependências](https://img.shields.io/badge/dependências-0-brightgreen) ![Testes](https://img.shields.io/badge/testes-61-brightgreen) ![Licença](https://img.shields.io/badge/licença-MIT-lightgrey)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Dependências](https://img.shields.io/badge/dependências-0-brightgreen) ![Testes](https://img.shields.io/badge/testes-65-brightgreen) ![Licença](https://img.shields.io/badge/licença-MIT-lightgrey)
 
 | | |
 |---|---|
@@ -41,7 +41,7 @@ Cada exigência do PDF da situação de aprendizagem e onde ela está atendida:
 
 | Critério (peso) | Evidência no repositório |
 |---|---|
-| Fundamentação em engenharia econômica (3,0) | 61 testes com valores conferidos à mão, inclusive casos de borda (sem TIR, várias TIR, divisão por zero) |
+| Fundamentação em engenharia econômica (3,0) | 65 testes com valores conferidos à mão, inclusive casos de borda (sem TIR, várias TIR, divisão por zero) |
 | Engenharia e arquitetura da skill (2,5) | Validação automática de YAML, tamanho do corpo, referências citadas e cópia `.claude` idêntica à canônica |
 | Documentação e repositório (1,5) | Este README, `CONTRIBUTING.md`, `CHANGELOG.md`, CI no GitHub em Python 3.9 e 3.12 |
 | Aplicação prática no TCC (1,5) | Relatório com 15 seções, esforço medido no histórico real do GitHub, premissas com fonte e reprodução byte a byte por comando |
@@ -196,7 +196,7 @@ python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py -
   SKILL.md                    frontmatter YAML e instruções procedurais (camadas 1 e 2)
   scripts/                    camada 3, Python determinístico
     econ_core.py              fórmulas das aulas 1 a 12
-    econ_cli.py               16 comandos: vpl, tir, payback, gva, markup, saas, comparar, priorizar...
+    econ_cli.py               18 comandos: vpl, tir, payback, gva, markup, saas, equilibrio, estresse...
     gerar_relatorio.py        relatório Markdown completo a partir de um JSON
     historico_git.py          esforço, sprints e valor entregue a partir do histórico do GitHub
   references/                 teoria e critérios de decisão, um arquivo por tema das aulas
@@ -204,7 +204,7 @@ python .agents/skills/engenharia-economica-software/scripts/gerar_relatorio.py -
 .claude/skills/...            cópia para o Claude Code (gerada por instalar.py)
 examples/                     tcc-input.json, tcc-valuation-report.md e dados/ (snapshot do histórico do TCC)
 evals/evals.json              10 casos de avaliação (7 numéricos, verificados por teste)
-tests/                        61 testes: fórmulas, CLI, estrutura da skill, relatório e evals
+tests/                        65 testes: fórmulas, CLI, estrutura da skill, relatório e evals
 docs/                         roteiro do workshop, slides em PDF e o gerador dos slides
 instalar.py                   instalador (Claude Code e genérico)
 ```

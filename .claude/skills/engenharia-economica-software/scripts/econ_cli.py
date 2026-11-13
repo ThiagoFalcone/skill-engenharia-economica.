@@ -14,6 +14,8 @@ Exemplos:
     python econ_cli.py suficiente --arquivo niveis.json
     python econ_cli.py modelo --arquivo entrada.json            # VPL/TIR/payback do modelo de negócio
     python econ_cli.py cocomo --kloc 28.5
+    python econ_cli.py equilibrio --taxa 0.14 --fluxos -120000 18000 45000 60000 70000
+    python econ_cli.py estresse --taxa 0.14 --fator-investimento 1.25 --fluxos -120000 18000 45000 60000 70000
 Para o relatório completo use gerar_relatorio.py.
 """
 from __future__ import annotations
@@ -114,6 +116,11 @@ def construir_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("modelo", help="Indicadores, cenários e sensibilidade de um modelo de negócio")
     p.add_argument("--arquivo", required=True, help="JSON com a chave 'modelo' (ou o próprio modelo)")
 
+    fluxo_args(sub.add_parser("equilibrio", help="Investimento máximo e queda de receita que zeram o VPL"), True)
+    p = sub.add_parser("estresse", help="Indicadores com investimento e/ou receita multiplicados por um fator")
+    fluxo_args(p, True)
+    p.add_argument("--fator-investimento", type=float, default=1.0, help="1.25 = custo 25%% maior")
+    p.add_argument("--fator-receita", type=float, default=1.0, help="0.8 = receita 20%% menor")
     p = sub.add_parser("cocomo", help="Esforço de referência (COCOMO básico)")
     p.add_argument("--kloc", type=float, required=True)
     p.add_argument("--modo", choices=["organico", "semidestacado", "embarcado"], default="organico")
@@ -184,6 +191,10 @@ def executar(args: argparse.Namespace) -> Any:
         ind.pop("detalhe")
         return {"indicadores": ind, "cenarios": ec.cenarios(modelo), "sensibilidade": ec.sensibilidade(modelo),
                 "saas": ec.metricas_saas(modelo), "fator_clientes_equilibrio": ec.fator_equilibrio(modelo)}
+    if c == "equilibrio":
+        return ec.equilibrio_fluxo(args.taxa, args.fluxos)
+    if c == "estresse":
+        return ec.estresse_fluxo(args.taxa, args.fluxos, args.fator_investimento, args.fator_receita)
     if c == "cocomo":
         return ec.cocomo_basico(args.kloc, args.modo)
     raise SystemExit(f"comando desconhecido: {c}")

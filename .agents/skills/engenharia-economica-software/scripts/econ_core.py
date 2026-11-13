@@ -610,3 +610,52 @@ def fator_equilibrio(modelo: Dict[str, Any], fator: str = "fator_clientes",
         else:
             lo, flo = mid, fm
     return (lo + hi) / 2.0
+
+
+# --------------------------------------------------------------------------- #
+# Ponto de equilíbrio e teste de estresse de um fluxo (cálculo pontual)
+# --------------------------------------------------------------------------- #
+def _vp_futuros(taxa: float, fluxos: Fluxo) -> float:
+    """Valor presente dos fluxos dos períodos 1..n (tudo, menos o investimento em t=0)."""
+    return sum(f / (1.0 + taxa) ** t for t, f in enumerate(fluxos) if t >= 1)
+
+
+def equilibrio_fluxo(taxa: float, fluxos: Fluxo) -> Dict[str, Optional[float]]:
+    """Quanto o investimento e a receita podem variar até o VPL zerar.
+
+    Pressupõe ``fluxos[0] < 0`` (investimento) e os demais períodos como entradas líquidas.
+    ``investimento_maximo`` é o maior desembolso em t=0 com VPL >= 0; ``fator_receita_minimo`` é o
+    quanto os fluxos futuros podem encolher (1.0 = hoje) antes de o VPL ficar negativo.
+    """
+    if not fluxos or fluxos[0] >= 0:
+        raise ValueError("o primeiro fluxo (t=0) deve ser o investimento, negativo")
+    investimento = -fluxos[0]
+    vp = _vp_futuros(taxa, fluxos)
+    return {
+        "vpl_atual": vpl(taxa, fluxos),
+        "investimento_atual": investimento,
+        "investimento_maximo": vp,
+        "folga_investimento": vp / investimento - 1.0,
+        "fator_receita_minimo": investimento / vp if vp > 0 else None,
+        "queda_receita_suportada": 1.0 - investimento / vp if vp > 0 else None,
+    }
+
+
+def estresse_fluxo(taxa: float, fluxos: Fluxo, fator_investimento: float = 1.0,
+                   fator_receita: float = 1.0) -> Dict[str, Any]:
+    """Recalcula os indicadores com o investimento e/ou a receita multiplicados por um fator."""
+    if not fluxos or fluxos[0] >= 0:
+        raise ValueError("o primeiro fluxo (t=0) deve ser o investimento, negativo")
+    if fator_investimento <= 0 or fator_receita <= 0:
+        raise ValueError("os fatores devem ser positivos (1.25 = +25%)")
+
+    def resumo(fl: Fluxo) -> Dict[str, Optional[float]]:
+        return {"vpl": vpl(taxa, fl), "tir": tir(fl), "payback_simples": payback(fl),
+                "payback_descontado": payback(fl, taxa), "indice_lucratividade": indice_lucratividade(taxa, fl)}
+
+    estressado = [fluxos[0] * fator_investimento] + [f * fator_receita for f in fluxos[1:]]
+    base, cenario = resumo(fluxos), resumo(estressado)
+    return {"fator_investimento": fator_investimento, "fator_receita": fator_receita,
+            "fluxos_estressados": estressado, "base": base, "estressado": cenario,
+            "variacao_vpl": cenario["vpl"] - base["vpl"],
+            "viavel_estressado": cenario["vpl"] > 0 and (cenario["tir"] or 0) > taxa}

@@ -12,6 +12,7 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SKILL = os.path.join(RAIZ, ".agents", "skills", "engenharia-economica-software")
 SCRIPTS = os.path.join(SKILL, "scripts")
 sys.path.insert(0, SCRIPTS)
+import econ_core as ec  # noqa: E402
 import gerar_relatorio  # noqa: E402
 
 
@@ -125,6 +126,41 @@ class TestHistoricoGit(unittest.TestCase):
             texto = gerar_relatorio.gerar(json.load(fh))
         for trecho in ("### 3.0 Evidência real", "git-hours", "## 15. Fontes e evidências", "Selic", "Robert Half"):
             self.assertIn(trecho, texto)
+
+
+class TestEquilibrioEEstresse(unittest.TestCase):
+    FLUXOS = [-120000, 18000, 45000, 60000, 70000]
+
+    def test_equilibrio(self):
+        r = ec.equilibrio_fluxo(0.14, self.FLUXOS)
+        self.assertAlmostEqual(r["investimento_maximo"], 132359.4228534, places=3)
+        # com o investimento no máximo, o VPL zera
+        self.assertAlmostEqual(ec.vpl(0.14, [-r["investimento_maximo"]] + self.FLUXOS[1:]), 0.0, places=6)
+        # com a receita no fator mínimo, o VPL zera
+        f = r["fator_receita_minimo"]
+        self.assertAlmostEqual(ec.vpl(0.14, [self.FLUXOS[0]] + [x * f for x in self.FLUXOS[1:]]), 0.0, places=6)
+
+    def test_estresse(self):
+        r = ec.estresse_fluxo(0.14, self.FLUXOS, fator_investimento=1.25)
+        self.assertAlmostEqual(r["estressado"]["vpl"], -17640.5771466, places=3)
+        self.assertIsNone(r["estressado"]["payback_descontado"])
+        self.assertFalse(r["viavel_estressado"])
+        self.assertAlmostEqual(r["variacao_vpl"], -30000.0, places=6)
+
+    def test_entradas_invalidas(self):
+        with self.assertRaises(ValueError):
+            ec.equilibrio_fluxo(0.1, [100, 200])
+        with self.assertRaises(ValueError):
+            ec.estresse_fluxo(0.1, self.FLUXOS, fator_receita=0)
+
+    def test_cli(self):
+        base = [sys.executable, os.path.join(SCRIPTS, "econ_cli.py")]
+        r = subprocess.run(base + ["estresse", "--taxa", "0.14", "--fator-investimento", "1.25", "--fluxos", *map(str, self.FLUXOS)],
+                           capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertAlmostEqual(json.loads(r.stdout)["estressado"]["vpl"], -17640.5771466, places=3)
+        r = subprocess.run(base + ["equilibrio", "--taxa", "0.14", "--fluxos", "100", "200"], capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(r.returncode, 2)
 
 
 class TestCLI(unittest.TestCase):

@@ -15,7 +15,7 @@ Você é um consultor de economia de TI. Sua missão: transformar dados de um pr
 
 ## Regras inegociáveis
 
-1. **Nunca calcule de cabeça.** Todo VPL, TIR, payback, GVA, CAUE, LTV etc. vem de `scripts/econ_cli.py` ou `scripts/gerar_relatorio.py`. Copie os números da saída; não os recalcule nem os arredonde antes de reportar.
+1. **Nunca calcule de cabeça**, nem somas simples como "investimento + VPL" ou "custo × 1,25": use `equilibrio` e `estresse`. Todo VPL, TIR, payback, GVA, CAUE, LTV etc. vem de `scripts/econ_cli.py` ou `scripts/gerar_relatorio.py`. Copie os números da saída; não os recalcule nem os arredonde antes de reportar.
 2. **Separe fato de premissa.** Dado medido (repositório, planilha de horas, contrato) é fato; preço, churn, número de clientes, TMA e custo/hora de mercado são **premissas**. Liste cada premissa no relatório, com fonte ou "estimativa". Não invente "dados reais": se faltar, pergunte ou use um valor explícito marcado como estimativa.
 3. **Consistência de unidades.** A taxa e o período dos fluxos devem ter a mesma base (anual com anual, mensal com mensal). Use `econ_cli.py taxa` para converter.
 4. **Sinais:** saídas de caixa negativas, entradas positivas; ano 0 = hoje.
@@ -41,7 +41,7 @@ Copie `assets/modelo-entrada.json` para o diretório de trabalho do usuário, pr
   python scripts/gerar_relatorio.py --entrada entrada.json --saida relatorio.md
   ```
   Gera: sumário executivo, custos diretos/indiretos, preço e valor, fluxo de caixa, VPL/TIR/payback, cenários e sensibilidade, CAC/LTV, GVA, alternativas, priorização, "bom o suficiente", modelo de negócio e riscos.
-- **Cálculo pontual** (pergunta avulsa): use `scripts/econ_cli.py <comando>`; rode `python scripts/econ_cli.py --help`. Comandos: `vpl`, `tir`, `payback`, `indicadores`, `equivalencia`, `taxa`, `gva`, `gva-sprints`, `markup`, `saas`, `depreciacao`, `priorizar`, `comparar`, `suficiente`, `modelo`, `cocomo`.
+- **Cálculo pontual** (pergunta avulsa): use `scripts/econ_cli.py <comando>`; rode `python scripts/econ_cli.py --help`. Comandos: `vpl`, `tir`, `payback`, `indicadores`, `equivalencia`, `taxa`, `gva`, `gva-sprints`, `markup`, `saas`, `depreciacao`, `priorizar`, `comparar`, `suficiente`, `modelo`, `cocomo`, `equilibrio`, `estresse`.
 
 **Mapa pergunta → comando (cálculo pontual):**
 
@@ -55,6 +55,8 @@ Copie `assets/modelo-entrada.json` para o diretório de trabalho do usuário, pr
 | LTV, CAC, LTV/CAC | `saas` |
 | Qual alternativa custa menos (vidas diferentes) | `comparar` |
 | Ordenar backlog / até onde investir em qualidade | `priorizar` / `suficiente` |
+| Custo máximo ou queda de receita que ainda dão VPL zero | `equilibrio --taxa X --fluxos ...` |
+| "E se o custo estourar 25%?" ou "e se a receita cair 20%?" | `estresse --taxa X --fator-investimento 1.25 --fator-receita 0.8 --fluxos ...` |
 | Business case completo | `gerar_relatorio.py` |
 
 `null` em `payback_*` significa **"não recupera o investimento no horizonte"**; o payback é dado em períodos, com interpolação. `tir: null` = o fluxo não troca de sinal (sem TIR).
